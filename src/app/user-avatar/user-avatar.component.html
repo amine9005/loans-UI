@@ -1,0 +1,27 @@
+<button
+  nz-button
+  class="avatar_icon"
+  nzType="link"
+  nzShape="circle"
+  style="
+    background-color: #001529;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 6px;
+  "
+  (click)="toggleMenu()"
+>
+  <nz-avatar [nzSize]="45" nzIcon="user"></nz-avatar>
+</button>
+
+<div class="user_menu" [hidden]="hide_menu">
+  <ul nz-menu nzMode="inline" nzTheme="dark">
+    <li nz-menu-item nzSelected>Login</li>
+    <li nz-menu-item>Register</li>
+  </ul>
+</div>
+
+<div class="arrow_decoration" [hidden]="hide_menu">
+  <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+</div>
