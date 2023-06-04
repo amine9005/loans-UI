@@ -4,23 +4,27 @@
     <nz-sider nzCollapsible nzWidth="200px">
       <ul nz-menu nzTheme="dark" nzMode="inline" style="font-size: 18px">
         <li nz-menu-item>
-          <span
-            nz-icon
-            nzType="home"
-            nzTheme="outline"
-            [style]="iconsStyle"
-          ></span>
-          <span>Dashboard</span>
+          <a href="dashboard">
+            <span
+              nz-icon
+              nzType="home"
+              nzTheme="outline"
+              [style]="iconsStyle"
+            ></span>
+            <span>Dashboard</span>
+          </a>
         </li>
 
         <li nz-menu-item>
-          <span
-            nz-icon
-            nzType="team"
-            nzTheme="outline"
-            [style]="iconsStyle"
-          ></span>
-          <span>Customers</span>
+          <a href="customers">
+            <span
+              nz-icon
+              nzType="team"
+              nzTheme="outline"
+              [style]="iconsStyle"
+            ></span>
+            <span>Customers</span>
+          </a>
         </li>
 
         <li nz-menu-item>
@@ -44,13 +48,15 @@
         </li>
 
         <li nz-menu-item>
-          <span
-            nz-icon
-            nzType="book"
-            nzTheme="outline"
-            [style]="iconsStyle"
-          ></span>
-          <span>Invoices</span>
+          <a href="invoices">
+            <span
+              nz-icon
+              nzType="book"
+              nzTheme="outline"
+              [style]="iconsStyle"
+            ></span>
+            <span>Invoices</span>
+          </a>
         </li>
 
         <li nz-menu-item>
@@ -84,12 +90,12 @@
         </li>
       </ul>
     </nz-sider>
-  <nz-layout>
-    <nz-content>
-      Content In Place
-    </nz-content>
-    <app-footer></app-footer>
+    <nz-layout>
+      <nz-content>
+        Content In Place
+        <router-outlet></router-outlet>
+      </nz-content>
+      <app-footer></app-footer>
+    </nz-layout>
   </nz-layout>
-  </nz-layout>
-
 </nz-layout>

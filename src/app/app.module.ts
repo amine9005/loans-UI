@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +23,12 @@ import { LayoutComponent } from './layout/layout.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { FooterComponent } from './footer/footer.component';
-
-
+import { CustomersComponent } from './customers/customers.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { LoansComponent } from './loans/loans.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { SettingsComponent } from './settings/settings.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(en);
 
@@ -34,6 +39,12 @@ registerLocaleData(en);
     LayoutComponent,
     UserAvatarComponent,
     FooterComponent,
+    CustomersComponent,
+    PaymentsComponent,
+    LoansComponent,
+    InvoicesComponent,
+    SettingsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +61,8 @@ registerLocaleData(en);
     NzIconModule,
     NzAvatarModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
