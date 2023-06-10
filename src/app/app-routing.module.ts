@@ -5,11 +5,8 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { LoansComponent } from './loans/loans.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { SettingsComponent } from './settings/settings.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { LogoutComponent } from './auth/logout/logout.component';
-import { ForgotComponent } from './auth/forgot/forgot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
@@ -17,11 +14,18 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'invoices', component: InvoicesComponent },
   { path: 'payments', component: PaymentsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'forgot-password', component: ForgotComponent },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth.module').then((mod) => mod.AuthModule),
+  },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then((mod) => mod.ProductsModule),
+  },
   { path: 'dashboard', component: DashboardComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

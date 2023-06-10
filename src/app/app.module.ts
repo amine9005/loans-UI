@@ -29,6 +29,10 @@ import { LoansComponent } from './loans/loans.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 registerLocaleData(en);
 
@@ -45,6 +49,7 @@ registerLocaleData(en);
     InvoicesComponent,
     SettingsComponent,
     DashboardComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +65,9 @@ registerLocaleData(en);
     NzCollapseModule,
     NzIconModule,
     NzAvatarModule,
+    NzFormModule,
+    NzInputModule,
+    NzInputNumberModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 

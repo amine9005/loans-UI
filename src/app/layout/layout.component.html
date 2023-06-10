@@ -4,7 +4,7 @@
     <nz-sider nzCollapsible nzWidth="200px">
       <ul nz-menu nzTheme="dark" nzMode="inline" style="font-size: 18px">
         <li nz-menu-item>
-          <a href="dashboard">
+          <a routerLinkActive="active" [routerLink]="'dashboard'">
             <span
               nz-icon
               nzType="home"
@@ -16,7 +16,7 @@
         </li>
 
         <li nz-menu-item>
-          <a href="customers">
+          <a routerLinkActive="active" [routerLink]="'customers'">
             <span
               nz-icon
               nzType="team"
@@ -92,7 +92,6 @@
     </nz-sider>
     <nz-layout>
       <nz-content>
-        Content In Place
         <router-outlet></router-outlet>
       </nz-content>
       <app-footer></app-footer>
