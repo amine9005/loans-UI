@@ -1,1 +1,97 @@
-<p>register works!</p>
+<form
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Name!">
+      <nz-input-group nzPrefixIcon="user" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          formControlName="name"
+          placeholder="Name"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Last Name!">
+      <nz-input-group nzPrefixIcon="user" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          formControlName="lastName"
+          placeholder="Last Name"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Email!">
+      <nz-input-group nzPrefixIcon="mail" class="field">
+        <input
+          class="field"
+          type="email"
+          nz-input
+          formControlName="email"
+          placeholder="Email"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your birth date!">
+      <nz-input-group nzPrefixIcon="clock" class="field">
+        <input class="field" type="date" nz-input formControlName="dob" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock" class="field">
+        <input
+          class="field"
+          type="password"
+          nz-input
+          formControlName="password"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Password do not match!">
+      <nz-input-group nzPrefixIcon="lock" class="field">
+        <input
+          class="field"
+          type="password"
+          nz-input
+          formControlName="checkPassword"
+          placeholder="Confirm Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button
+    nz-button
+    [nzType]="'primary'"
+    class="login-form-button"
+    nzSize="large"
+  >
+    Register
+  </button>
+  <div class="link-register">
+    Have an Account?
+    <a>Login now</a>
+  </div>
+</form>

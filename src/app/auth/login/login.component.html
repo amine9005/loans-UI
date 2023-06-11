@@ -1,13 +1,18 @@
-<form nz-form class="login-form" (ngSubmit)="submitForm()">
+<form
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+>
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your username!">
+    <nz-form-control nzErrorTip="Please input your email!">
       <nz-input-group nzPrefixIcon="user" class="field">
         <input
           class="field"
-          type="text"
+          type="email"
           nz-input
-          formControlName="userName"
-          placeholder="Username"
+          formControlName="email"
+          placeholder="Email"
         />
       </nz-input-group>
     </nz-form-control>
@@ -25,7 +30,7 @@
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
-  <div nz-row class="login-form-margin">
+  <div nz-row class="login-form-margin middle-row">
     <div nz-col [nzSpan]="12">
       <label nz-checkbox formControlName="remember">
         <span>Remember me</span>
@@ -37,11 +42,14 @@
   </div>
   <button
     nz-button
-    class="login-form-button login-form-margin"
     [nzType]="'primary'"
+    class="login-form-button"
+    nzSize="large"
   >
     Log in
   </button>
-  Or
-  <a>register now!</a>
+  <div class="link-register">
+    Or
+    <a>register now!</a>
+  </div>
 </form>

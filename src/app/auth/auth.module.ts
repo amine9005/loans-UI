@@ -5,6 +5,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
@@ -27,6 +30,9 @@ import { ResetComponent } from './reset/reset.component';
     NzGridModule,
     NzButtonModule,
     NzCheckboxModule,
+    NzCardModule,
+    ReactiveFormsModule,
+    NzTypographyModule,
   ],
 })
 export class AuthModule {}
