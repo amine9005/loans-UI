@@ -33,7 +33,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-
+import { StoreModule } from '@ngrx/store';
+import { userAuthReducer } from './redux/auth.reducer';
 registerLocaleData(en);
 
 @NgModule({
@@ -68,6 +69,7 @@ registerLocaleData(en);
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
+    StoreModule.forRoot({ user: userAuthReducer }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 

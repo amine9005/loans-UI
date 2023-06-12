@@ -1,15 +1,17 @@
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component';
+import { Store } from '@ngrx/store';
+import { userSate } from './redux/user.types';
 
-describe("App Component", () => {
+describe('App Component', () => {
+  let fixture: AppComponent;
+  let store: Store<{
+    user: userSate;
+  }>;
+  beforeEach(() => {
+    fixture = new AppComponent(store);
+  });
 
-    let fixture: AppComponent
-
-    beforeEach(() => {
-        fixture = new AppComponent()
-    })
-
-    test("should be created", () => {
-        expect(fixture).toBeDefined()
-    })
-
-})
+  test('should be created', () => {
+    expect(fixture).toBeDefined();
+  });
+});

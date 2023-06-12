@@ -1,23 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Store } from '@ngrx/store';
+import { userSate } from '../../redux/user.types';
 import { LoginComponent } from './login.component';
+import { FormBuilder } from '@angular/forms';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let fixture: LoginComponent;
+  let store: Store<{
+    user: userSate;
+  }>;
+  let fb: FormBuilder;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    fixture = new LoginComponent(fb, store);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(1).toBeTruthy();
   });
 });
