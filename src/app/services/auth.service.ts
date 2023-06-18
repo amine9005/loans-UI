@@ -3,7 +3,11 @@ import httpCommon from '../utils/http-common';
 class authServiceClass {
   login(email: string, password: string) {
     console.log('email: ' + email, ' password: ' + password);
-    return httpCommon.post('auth/login', { email, password });
+    return httpCommon.post(
+      'auth/login',
+      { email, password },
+      { withCredentials: true }
+    );
   }
 
   register(
@@ -22,6 +26,14 @@ class authServiceClass {
       email: email,
       password: password,
     });
+  }
+
+  refresh() {
+    return httpCommon.get('auth/refresh', { withCredentials: true });
+  }
+
+  logout() {
+    return httpCommon.post('auth/logout', {}, { withCredentials: true });
   }
 }
 

@@ -1,4 +1,4 @@
-import { userSate } from './user.types';
+// import { userSate } from './user.types';
 
 export const userInitialState = {
   isLoggedIn: false,

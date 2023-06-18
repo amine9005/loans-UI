@@ -51,8 +51,14 @@
 
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your birth date!">
-        <nz-input-group nzPrefixIcon="clock" class="field">
-          <input class="field" type="date" nz-input formControlName="dob" />
+        <nz-input-group class="field">
+          <input
+            class="field"
+            type="date"
+            nz-input
+            formControlName="dob"
+            [max]="maxDate"
+          />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>

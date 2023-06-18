@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import authService from '../../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,6 +14,7 @@ import authService from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
+  maxDate = new Date();
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -28,6 +30,7 @@ export class RegisterComponent implements OnInit {
         )
         .then((resp) => {
           console.log('success', resp);
+          this.router.navigate(['auth/login']);
         })
         .catch((err) => {
           console.log('error', err);
@@ -42,7 +45,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

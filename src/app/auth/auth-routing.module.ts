@@ -7,7 +7,11 @@ import { ResetComponent } from './reset/reset.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'register',
+
+    component: RegisterComponent,
+  },
   { path: 'reset', component: ResetComponent },
   { path: 'logout', component: LogoutComponent },
 ];

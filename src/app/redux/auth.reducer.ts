@@ -13,7 +13,7 @@ const _userAuthReducer = createReducer(
       token: action.token,
     };
   }),
-  on(loggedOut, (state, action) => {
+  on(loggedOut, (state) => {
     return {
       ...state,
       isLoggedIn: false,

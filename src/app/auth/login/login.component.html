@@ -7,6 +7,8 @@
   >
     <h2 class="title" nz-typography>Login</h2>
 
+    <p *ngIf="invalid" class="invalid">Invalid Credentials</p>
+
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your email!">
         <nz-input-group nzPrefixIcon="user" class="field">
@@ -33,7 +35,7 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-    <div nz-row class="login-form-margin middle-row">
+    <!-- <div nz-row class="login-form-margin middle-row">
       <div nz-col [nzSpan]="12">
         <label nz-checkbox formControlName="remember">
           <span>Remember me</span>
@@ -42,7 +44,7 @@
       <div nz-col [nzSpan]="12">
         <a class="login-form-forgot">Forgot password</a>
       </div>
-    </div>
+    </div> -->
     <button
       nz-button
       [nzType]="'primary'"

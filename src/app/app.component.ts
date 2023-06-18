@@ -7,7 +7,7 @@ import { userSate } from './redux/user.types';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'Inventory Manager';
+  title = 'Auth System';
   constructor(
     private store: Store<{
       user: userSate;
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.select('user').subscribe((data) => {
       this.isLoggedIn = data.isLoggedIn;
-      console.log('isLoggedIn: ' + this.isLoggedIn);
+      // console.log('isLoggedIn: ' + this.isLoggedIn);
     });
   }
 }

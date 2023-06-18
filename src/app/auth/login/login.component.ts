@@ -4,6 +4,8 @@ import authService from '../../services/auth.service';
 import { Store } from '@ngrx/store';
 import { loggedIn } from '../../redux/auth.actions';
 import { userSate } from '../../redux/user.types';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,20 +13,24 @@ import { userSate } from '../../redux/user.types';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
+  invalid = false;
 
   submitForm(): void {
+    this.invalid = false;
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
       authService
         .login(this.validateForm.value.email, this.validateForm.value.password)
         .then((resp) => {
-          console.log('success', resp);
+          // console.log('resp: ' + resp);
           this.store.dispatch(
             loggedIn({ isLoggedIn: true, token: resp.data.accessToken })
           );
+          this.invalid = false;
+          this.router.navigate(['']);
         })
         .catch((err) => {
           console.log('error', err);
+          this.invalid = true;
         });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -37,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private store: Store<{
       user: userSate;

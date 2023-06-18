@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,11 +22,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { FooterComponent } from './footer/footer.component';
-import { CustomersComponent } from './customers/customers.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { LoansComponent } from './loans/loans.component';
-import { InvoicesComponent } from './invoices/invoices.component';
-import { SettingsComponent } from './settings/settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -35,6 +29,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { StoreModule } from '@ngrx/store';
 import { userAuthReducer } from './redux/auth.reducer';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -44,11 +40,6 @@ registerLocaleData(en);
     LayoutComponent,
     UserAvatarComponent,
     FooterComponent,
-    CustomersComponent,
-    PaymentsComponent,
-    LoansComponent,
-    InvoicesComponent,
-    SettingsComponent,
     DashboardComponent,
     PageNotFoundComponent,
   ],
@@ -69,6 +60,7 @@ registerLocaleData(en);
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
+    NzTypographyModule,
     StoreModule.forRoot({ user: userAuthReducer }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
