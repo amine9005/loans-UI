@@ -28,8 +28,11 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { StoreModule } from '@ngrx/store';
-import { userAuthReducer } from './redux/auth.reducer';
+import { userAuthReducer } from './redux/auth/auth.reducer';
+import { customersReducer } from './redux/customers/customers.reducer';
+
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { customer } from './redux/customers/customers.types';
 
 registerLocaleData(en);
 
@@ -62,6 +65,7 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzTypographyModule,
     StoreModule.forRoot({ user: userAuthReducer }),
+    // StoreModule.forRoot({ customers: customersReducer }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 

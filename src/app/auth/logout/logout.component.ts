@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { loggedOut } from '../../redux/auth.actions';
-import { userSate } from 'src/app/redux/user.types';
+import { loggedOut } from '../../redux/auth/auth.actions';
+import { userSate } from 'src/app/redux/auth/user.types';
 import { Store } from '@ngrx/store';
 import authService from 'src/app/services/auth.service';
 @Component({

@@ -1,6 +1,6 @@
 import { AppComponent } from './app.component';
 import { Store } from '@ngrx/store';
-import { userSate } from './redux/user.types';
+import { userSate } from './redux/auth/user.types';
 
 describe('App Component', () => {
   let fixture: AppComponent;

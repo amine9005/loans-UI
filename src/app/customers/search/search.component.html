@@ -1,0 +1,22 @@
+<div nz-row nzJustify="center" class="top">
+  <div nz-col nzSpan="15">
+    <div>
+      <nz-input-group>
+        <input type="text" placeholder="Enter a value to search by" nz-input />
+      </nz-input-group>
+    </div>
+  </div>
+
+  <div nz-col nzSpan="4">
+    <nz-select [(ngModel)]="selectBy" (ngModelChange)="searchBy($event)">
+      <nz-option
+        *ngFor="let v of selections"
+        [nzValue]="v"
+        [nzLabel]="v"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <div nz-col nzSpan="3">
+    <button nz-button [nzType]="'primary'" class="search-btn">Search</button>
+  </div>
+</div>

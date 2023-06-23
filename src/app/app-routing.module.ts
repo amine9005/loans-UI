@@ -10,6 +10,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./auth/auth.module').then((mod) => mod.AuthModule),
   },
+  {
+    path: 'customers',
+    loadChildren: () =>
+      import('./customers/customers.module').then((mod) => mod.CustomersModule),
+  },
 
   {
     path: '',

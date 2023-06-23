@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import authService from '../../services/auth.service';
 import { Store } from '@ngrx/store';
-import { loggedIn } from '../../redux/auth.actions';
-import { userSate } from '../../redux/user.types';
+import { loggedIn } from '../../redux/auth/auth.actions';
+import { userSate } from '../../redux/auth/user.types';
 import { Router } from '@angular/router';
 
 @Component({

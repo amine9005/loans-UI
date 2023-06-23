@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { userSate } from './redux/user.types';
+import { userSate } from './redux/auth/user.types';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

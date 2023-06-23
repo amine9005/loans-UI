@@ -8,9 +8,9 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { userSate } from '../redux/user.types';
+import { userSate } from '../redux/auth/user.types';
 import authService from '../services/auth.service';
-import { loggedIn } from '../redux/auth.actions';
+import { loggedIn } from '../redux/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
