@@ -64,8 +64,7 @@ registerLocaleData(en);
     NzInputModule,
     NzInputNumberModule,
     NzTypographyModule,
-    StoreModule.forRoot({ user: userAuthReducer }),
-    // StoreModule.forRoot({ customers: customersReducer }),
+    StoreModule.forRoot({ user: userAuthReducer, customers: customersReducer }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 

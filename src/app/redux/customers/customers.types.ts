@@ -17,5 +17,5 @@ export interface customersArray extends Array<customer> {
 export interface response {
   isLoading: boolean;
   error: boolean;
-  data: [];
+  data: Array<customersArray> | any;
 }

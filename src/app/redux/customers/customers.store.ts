@@ -1,12 +1,10 @@
-const customers = [
-  {
-    _id: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    dob: '',
-  },
-];
+const customers = {
+  _id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  dob: '',
+};
 
 export const customersInit = {
   isLoading: false,
