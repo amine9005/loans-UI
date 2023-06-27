@@ -5,19 +5,21 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Age</th>
+          <th>Date of birth</th>
           <th>Email</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of basicTable.data">
+        <tr *ngFor="let data of listOfData">
           <td>
-            <a nz-button nzType="link">{{ data.name }}</a>
+            <a nz-button nzType="link">{{
+              data.firstName + " " + data.lastName
+            }}</a>
           </td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.address }}</td>
+          <td>{{ data.dob }}</td>
+          <td>{{ data.email }}</td>
           <td>
             <button nz-button nzType="link">
               <span nz-icon nzType="edit"></span>

@@ -6,9 +6,10 @@ import { CustomersService } from 'src/app/services/customers.service';
 
 interface Person {
   key: string;
-  name: string;
-  age: number;
-  address: string;
+  firstName: string;
+  lastName: string;
+  dob: number;
+  email: string;
 }
 @Component({
   selector: 'app-list',
@@ -24,40 +25,28 @@ export class ListComponent implements OnInit {
 
   constructor(
     private store: Store<{
-      user: response;
+      customers: response;
     }>,
     private customerService: CustomersService
   ) {}
-
+  listOfData: Person[] = [];
   ngOnInit(): void {
     this.customerService
       .getUsers()
       .then((users) => {
-        console.log('users: ' + users);
-        // this.store.dispatch(setCustomers())
+        console.log('users: ' + JSON.stringify(users.data));
+        this.store.dispatch(
+          setCustomers({ isLoading: false, error: false, data: users.data })
+        );
       })
       .catch((err) => {
         console.log('error: ' + err);
+        this.store.dispatch(
+          setCustomers({ isLoading: false, error: true, data: [] })
+        );
       });
+    this.store.select('customers').subscribe((data) => {
+      this.listOfData = data.data['users'] as Person[];
+    });
   }
-  listOfData: Person[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-  ];
 }
