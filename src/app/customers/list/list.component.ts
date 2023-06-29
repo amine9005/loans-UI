@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
     this.customerService
       .getUsers()
       .then((users) => {
-        console.log('users: ' + JSON.stringify(users.data));
+        // console.log('users: ' + JSON.stringify(users.data));
         this.store.dispatch(
           setCustomers({ isLoading: false, error: false, data: users.data })
         );
@@ -46,7 +46,11 @@ export class ListComponent implements OnInit {
         );
       });
     this.store.select('customers').subscribe((data) => {
-      this.listOfData = data.data['users'] as Person[];
+      if (data.data['users']) {
+        this.listOfData = data.data['users'] as Person[];
+      } else if (data.data['user']) {
+        this.listOfData = [data.data['user']] as Person[];
+      }
     });
   }
 }

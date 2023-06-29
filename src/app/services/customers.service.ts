@@ -23,4 +23,17 @@ export class CustomersService {
     };
     return httpCommon.get('/users', config);
   }
+
+  getUserById(id: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    console.log('searching for ', '/users/' + id);
+    return httpCommon.get('/users/' + id, config);
+  }
 }
