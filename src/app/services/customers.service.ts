@@ -36,4 +36,17 @@ export class CustomersService {
     console.log('searching for ', '/users/' + id);
     return httpCommon.get('/users/' + id, config);
   }
+
+  getUserByEmail(email: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    console.log('searching for ', '/users/emails/' + email);
+    return httpCommon.get('/users/emails/' + email, config);
+  }
 }

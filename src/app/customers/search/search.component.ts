@@ -47,6 +47,25 @@ export class SearchComponent {
           );
         });
       console.log('searching for: ' + this.searchTerm);
+    } else if (this.selectBy === 'By Email') {
+      this.customerService
+        .getUserByEmail(this.searchTerm)
+        .then((user) => {
+          console.log('User ' + JSON.stringify(user));
+          this.store.dispatch(
+            setCustomers({
+              isLoading: false,
+              error: false,
+              data: user.data,
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error ' + JSON.stringify(error));
+          this.store.dispatch(
+            setCustomers({ isLoading: false, error: false, data: [] })
+          );
+        });
     }
   }
 }
