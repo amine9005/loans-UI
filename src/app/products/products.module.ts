@@ -12,9 +12,20 @@ import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { ProductsRoutingModule } from './products-routing.module';
+import { ListComponent } from './list/list.component';
+import { EditComponent } from './edit/edit.component';
+import { SearchComponent } from './search/search.component';
+import { AddComponent } from './add/add.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ListComponent,
+    EditComponent,
+    SearchComponent,
+    AddComponent,
+    DeleteComponent,
+  ],
   imports: [
     CommonModule,
     NzTableModule,

@@ -1,58 +1,58 @@
 <!-- <app-search></app-search> -->
 <div nz-row>
   <div nz-col nzSpan="24">
-    <!-- <nz-table #basicTable [nzData]="listOfData"> -->
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Thumbnail</th>
-        <th>Pictures</th>
-        <th>Slag</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of listOfData">
-        <td>
-          <a nz-button nzType="link">{{ data.name }}</a>
-        </td>
-        <td>
-          <a nz-button nzType="link">{{ data.thumbnail }}</a>
-        </td>
+    <nz-table #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Thumbnail</th>
+          <th>Pictures</th>
+          <th>Slag</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listOfData">
+          <td>
+            <a nz-button nzType="link">{{ data.name }}</a>
+          </td>
+          <td>
+            <a nz-button nzType="link">{{ data.thumbnail }}</a>
+          </td>
 
-        <td>
-          <a nz-button nzType="link">{{ data.pictures }}</a>
-        </td>
+          <td>
+            <a nz-button nzType="link">{{ data.pictures }}</a>
+          </td>
 
-        <td>
-          <a nz-button nzType="link">{{ data.slag }}</a>
-        </td>
+          <td>
+            <a nz-button nzType="link">{{ data.slag }}</a>
+          </td>
 
-        <td>
-          <a nz-button nzType="link">{{ data.price }}</a>
-        </td>
+          <td>
+            <a nz-button nzType="link">{{ data.price }}</a>
+          </td>
 
-        <td>
-          <a nz-button nzType="link">{{ data.quantity }}</a>
-        </td>
-        <td>
-          <button nz-button nzType="link">
-            <span nz-icon nzType="edit"></span>
-            Edit
-          </button>
-        </td>
+          <td>
+            <a nz-button nzType="link">{{ data.quantity }}</a>
+          </td>
+          <td>
+            <button nz-button nzType="link">
+              <span nz-icon nzType="edit"></span>
+              Edit
+            </button>
+          </td>
 
-        <td>
-          <button nz-button nzType="link" nzDanger>
-            <span nz-icon nzType="delete"></span>
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-    <!-- </nz-table> -->
+          <td>
+            <button nz-button nzType="link" nzDanger>
+              <span nz-icon nzType="delete"></span>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
 </div>
