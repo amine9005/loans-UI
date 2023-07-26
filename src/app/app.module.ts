@@ -32,7 +32,7 @@ import { userAuthReducer } from './redux/auth/auth.reducer';
 import { customersReducer } from './redux/customers/customers.reducer';
 
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { customer } from './redux/customers/customers.types';
+import { productsReducer } from './redux/products/products.reducer';
 
 registerLocaleData(en);
 
@@ -64,7 +64,11 @@ registerLocaleData(en);
     NzInputModule,
     NzInputNumberModule,
     NzTypographyModule,
-    StoreModule.forRoot({ user: userAuthReducer, customers: customersReducer }),
+    StoreModule.forRoot({
+      user: userAuthReducer,
+      customers: customersReducer,
+      products: productsReducer,
+    }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 
