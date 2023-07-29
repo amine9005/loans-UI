@@ -1,4 +1,17 @@
+<div nz-row nzJustify="center" class="top">
+  <div nz-col nzSpan="19">
+    <h3 class="header-txt" nz-typography>
+      Currently There is 0 Products in Inventory
+    </h3>
+  </div>
+
+  <div nz-col nzSpan="3">
+    <button nz-button [nzType]="'primary'" class="add-btn">Add New</button>
+  </div>
+</div>
+
 <app-search></app-search>
+
 <div nz-row>
   <div nz-col nzSpan="24">
     <nz-table #basicTable [nzData]="listOfData">
