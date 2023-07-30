@@ -12,12 +12,14 @@ const routes: Routes = [
   },
   {
     path: 'customers',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./customers/customers.module').then((mod) => mod.CustomersModule),
   },
 
   {
     path: 'products',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./products/products.module').then((mod) => mod.ProductsModule),
   },

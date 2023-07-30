@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  // ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  // RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { userSate } from '../redux/auth/user.types';
 import authService from '../services/auth.service';
@@ -23,20 +16,18 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
   isLoggedIn = false;
-  canActivate(): // next: ActivatedRouteSnapshot,
+  async canActivate(): // next: ActivatedRouteSnapshot,
   // state: RouterStateSnapshot
-
-  | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  Promise<boolean> {
     this.store.select('user').subscribe((data) => {
       this.isLoggedIn = data.isLoggedIn;
+      // alert(JSON.stringify(UrlTree));
+
       // console.log('from guard isLoggedIn: ' + this.isLoggedIn);
     });
 
     if (!this.isLoggedIn) {
-      authService
+      await authService
         .refresh()
         .then((resp) => {
           // console.log('accessToken: ' + JSON.stringify(resp.data.accessToken));

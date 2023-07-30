@@ -17,7 +17,7 @@ interface Product {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   constructor(
     private store: Store<{
       products: response;

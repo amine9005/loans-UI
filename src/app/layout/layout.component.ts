@@ -6,14 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
   iconsStyle = {
     fontSize: '20px',
   };
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    this.router.navigate(['']);
-  }
 }

@@ -1,1 +1,45 @@
+<div class="container">
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    class="add-form"
+    (ngSubmit)="submitForm()"
+  >
+    <h2 class="title" nz-typography>Add Product</h2>
 
+    <p *ngIf="invalid" class="invalid">Invalid Credentials</p>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter a product name">
+        <nz-input-group nzPrefixIcon="edit" class="field">
+          <input
+            class="field"
+            type="text"
+            nz-input
+            formControlName="name"
+            placeholder="Product Name"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- <div nz-row class="add-form-margin middle-row">
+      <div nz-col [nzSpan]="12">
+        <label nz-checkbox formControlName="remember">
+          <span>Remember me</span>
+        </label>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <a class="add-form-forgot">Forgot password</a>
+      </div>
+    </div> -->
+    <button
+      nz-button
+      [nzType]="'primary'"
+      class="add-form-button"
+      nzSize="large"
+    >
+      Add Product
+    </button>
+  </form>
+</div>
