@@ -23,6 +23,65 @@
       </nz-form-control>
     </nz-form-item>
 
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="edit" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          formControlName="slag"
+          readonly
+          value="product-slag"
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select an image">
+        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+          <input
+            class="field"
+            type="file"
+            nz-input
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select an image">
+        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+          <input
+            class="field"
+            type="file"
+            nz-input
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+            multiple
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select an image">
+        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+          <input
+            class="field"
+            type="file"
+            nz-input
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+            multiple
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
     <!-- <div nz-row class="add-form-margin middle-row">
       <div nz-col [nzSpan]="12">
         <label nz-checkbox formControlName="remember">

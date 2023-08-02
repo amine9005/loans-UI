@@ -29,6 +29,9 @@
 
 }
 
+input{
+  margin-left: .5rem;
+}
 .title{
   text-align: center;
   margin-bottom: 1rem;
@@ -41,6 +44,21 @@
 .field {
   font-size: 1.5rem;
   border-radius: 1rem;
+
+}
+
+.file-field{
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: none;
+
+  &:hover{
+    cursor: pointer;
+  }
+
+  &:focus{
+    border-color: #ff4646;
+  }
 
 }
 
