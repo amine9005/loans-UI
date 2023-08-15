@@ -37,61 +37,101 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please select an image">
-        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+      <nz-form-control nzErrorTip="Please enter product quantity">
+        <nz-input-group nzPrefixIcon="book" class="field">
           <input
             class="field"
-            type="file"
+            type="number"
             nz-input
-            formControlName="thumbnail"
-            accept=".png,.jpg,.jpeg"
-            placeholder="Thumbnail"
+            min="0"
+            formControlName="quantity"
+            placeholder="Product Quantity"
           />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please select an image">
-        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+      <nz-form-control nzErrorTip="Please enter product price">
+        <nz-input-group nzPrefixIcon="dollar" class="field">
           <input
             class="field"
-            type="file"
+            type="number"
             nz-input
-            formControlName="thumbnail"
-            accept=".png,.jpg,.jpeg"
-            placeholder="Thumbnail"
-            multiple
+            min="0"
+            formControlName="price"
+            placeholder="Product Price"
           />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please select an image">
-        <nz-input-group nzPrefixIcon="file-image" class="file-field">
-          <input
-            class="field"
-            type="file"
-            nz-input
-            formControlName="thumbnail"
-            accept=".png,.jpg,.jpeg"
-            placeholder="Thumbnail"
-            multiple
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- <div nz-row class="add-form-margin middle-row">
+    <div nz-row class="add-form-margin middle-row">
       <div nz-col [nzSpan]="12">
-        <label nz-checkbox formControlName="remember">
-          <span>Remember me</span>
+        <label nz-checkbox formControlName="Featured">
+          <span>Featured</span>
         </label>
       </div>
-      <div nz-col [nzSpan]="12">
-        <a class="add-form-forgot">Forgot password</a>
-      </div>
-    </div> -->
+    </div>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please Enter the product description">
+        <textarea
+          class="field"
+          type="text"
+          nz-input
+          formControlName="Description"
+          placeholder="Product description"
+          [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please Enter the product short description">
+        <textarea
+          class="field"
+          type="text"
+          nz-input
+          formControlName="short_description"
+          placeholder="short description"
+          [nzAutosize]="{ minRows: 3, maxRows: 4 }"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select an image">
+        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+          <input
+            class="field"
+            type="file"
+            nz-input
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+            multiple
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please Enter the product short description">
+        <nz-input-group nzPrefixIcon="file-image" class="file-field">
+          <input
+            class="field"
+            type="file"
+            nz-input
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+            multiple
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
     <button
       nz-button
       [nzType]="'primary'"

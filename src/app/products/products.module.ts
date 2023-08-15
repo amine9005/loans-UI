@@ -10,6 +10,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ListComponent } from './list/list.component';
@@ -39,6 +40,7 @@ import { DeleteComponent } from './delete/delete.component';
     FormsModule,
     NzIconModule,
     ProductsRoutingModule,
+    NzCheckboxModule,
   ],
 })
 export class ProductsModule {}

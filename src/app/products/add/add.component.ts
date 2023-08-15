@@ -29,6 +29,8 @@ export class AddComponent {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
+      price: [null, [Validators.required]],
+      quantity: [null, [Validators.required]],
     });
   }
 }
