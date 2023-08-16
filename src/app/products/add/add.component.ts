@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AddComponent {
   validateForm!: FormGroup;
   invalid = false;
+  imagesCount = 1;
 
   submitForm(): void {
     this.invalid = false;
@@ -24,6 +25,19 @@ export class AddComponent {
       });
     }
   }
+
+  increaseImagesCount(): void {
+    if (this.imagesCount < 10) {
+      this.imagesCount += 1;
+    }
+  }
+
+  removeImage(): void {
+    if (this.imagesCount > 0) {
+      this.imagesCount -= 1;
+    }
+  }
+
   constructor(private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {

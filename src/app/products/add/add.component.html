@@ -10,7 +10,7 @@
     <p *ngIf="invalid" class="invalid">Invalid Credentials</p>
 
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please enter a product name">
+      <nz-form-control nzErrorTip="Please enter product name">
         <nz-input-group nzPrefixIcon="edit" class="field">
           <input
             class="field"
@@ -18,6 +18,7 @@
             nz-input
             formControlName="name"
             placeholder="Product Name"
+            required
           />
         </nz-input-group>
       </nz-form-control>
@@ -32,6 +33,7 @@
           formControlName="slag"
           readonly
           value="product-slag"
+          required
         />
       </nz-input-group>
     </nz-form-item>
@@ -46,6 +48,7 @@
             min="0"
             formControlName="quantity"
             placeholder="Product Quantity"
+            required
           />
         </nz-input-group>
       </nz-form-control>
@@ -61,6 +64,7 @@
             min="0"
             formControlName="price"
             placeholder="Product Price"
+            required
           />
         </nz-input-group>
       </nz-form-control>
@@ -83,6 +87,7 @@
           formControlName="Description"
           placeholder="Product description"
           [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+          required
         ></textarea>
       </nz-form-control>
     </nz-form-item>
@@ -96,6 +101,7 @@
           formControlName="short_description"
           placeholder="short description"
           [nzAutosize]="{ minRows: 3, maxRows: 4 }"
+          required
         ></textarea>
       </nz-form-control>
     </nz-form-item>
@@ -111,26 +117,71 @@
             accept=".png,.jpg,.jpeg"
             placeholder="Thumbnail"
             multiple
+            required
           />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
+    <div *ngFor="let item of [].constructor(imagesCount)">
+      <nz-form-item>
+        <nz-form-control
+          nzErrorTip="Please Enter the product short description"
+        >
+          <nz-input-group
+            class="file-field"
+            [nzSuffix]="suffixTemplateInfo"
+            [nzPrefix]="prefixTemplateUser"
+          >
+            <input
+              class="field"
+              type="file"
+              nz-input
+              formControlName="thumbnail"
+              accept=".png,.jpg,.jpeg"
+              placeholder="Thumbnail"
+              multiple
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser
+            ><span nz-icon nzType="file-image"></span
+          ></ng-template>
+          <ng-template #suffixTemplateInfo>
+            <span
+              nz-icon
+              nz-button
+              (click)="removeImage()"
+              nzType="minus-circle"
+              class="remove-img-btn"
+            ></span>
+          </ng-template>
 
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please Enter the product short description">
-        <nz-input-group nzPrefixIcon="file-image" class="file-field">
-          <input
-            class="field"
-            type="file"
-            nz-input
-            formControlName="thumbnail"
-            accept=".png,.jpg,.jpeg"
-            placeholder="Thumbnail"
-            multiple
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
+          <!-- <nz-input-group nzPrefixIcon="file-image" class="file-field">
+            <input
+              class="field"
+              type="file"
+              nz-input
+              formControlName="thumbnail"
+              accept=".png,.jpg,.jpeg"
+              placeholder="Thumbnail"
+              multiple
+            />
+          </nz-input-group> -->
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="btn-holder">
+      <button
+        nz-button
+        type="button"
+        [nzType]="'primary'"
+        class="extend-images-btn"
+        nzSize="large"
+        (click)="increaseImagesCount()"
+      >
+        Add Image Field
+      </button>
+    </div>
 
     <button
       nz-button

@@ -79,3 +79,20 @@ input{
   text-align: center;
   align-items: center;
 }
+
+.btn-holder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extend-images-btn{
+  max-width: 200px;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.remove-img-btn{
+  color: #ff4646;
+  // background-color: #ff4646;
+}
