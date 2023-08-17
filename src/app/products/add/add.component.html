@@ -122,7 +122,7 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-    <div *ngFor="let item of [].constructor(imagesCount)">
+    <div *ngFor="let item of imagesArray">
       <nz-form-item>
         <nz-form-control
           nzErrorTip="Please Enter the product short description"
@@ -136,6 +136,7 @@
               class="field"
               type="file"
               nz-input
+              value="file.jpg"
               formControlName="thumbnail"
               accept=".png,.jpg,.jpeg"
               placeholder="Thumbnail"

@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+interface ProductImage {
+  id: number;
+  path: string;
+}
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -9,6 +15,12 @@ import { Router } from '@angular/router';
 export class AddComponent {
   validateForm!: FormGroup;
   invalid = false;
+  imagesArray: Array<ProductImage> = [
+    {
+      id: 0,
+      path: '',
+    },
+  ];
   imagesCount = 1;
 
   submitForm(): void {
@@ -27,13 +39,15 @@ export class AddComponent {
   }
 
   increaseImagesCount(): void {
-    if (this.imagesCount < 10) {
+    if (this.imagesArray.length < 10) {
+      this.imagesArray.push({ id: this.imagesCount - 1, path: '' });
       this.imagesCount += 1;
     }
   }
 
   removeImage(): void {
-    if (this.imagesCount > 0) {
+    if (this.imagesArray.length > 1) {
+      this.imagesArray.pop();
       this.imagesCount -= 1;
     }
   }
