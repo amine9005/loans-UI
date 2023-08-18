@@ -38,6 +38,18 @@
             <span>Products</span>
           </a>
         </li>
+
+        <li nz-menu-item>
+          <a routerLinkActive="active" [routerLink]="'orders'">
+            <span
+              nz-icon
+              nzType="unordered-list"
+              nzTheme="outline"
+              [style]="iconsStyle"
+            ></span>
+            <span>Orders</span>
+          </a>
+        </li>
       </ul>
     </nz-sider>
     <nz-layout>
