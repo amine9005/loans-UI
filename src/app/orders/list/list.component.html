@@ -1,1 +1,43 @@
-<p>list works!</p>
+<app-search></app-search>
+<div nz-row>
+  <div nz-col nzSpan="24">
+    <nz-table #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Items</th>
+          <th>Shipping Address</th>
+          <th>Payment Method</th>
+          <th>Price</th>
+          <th>Shipping Price</th>
+          <th>Total Price</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listOfData">
+          <!-- <td>
+            <a nz-button nzType="link">Items</a>
+          </td>
+          <td>{{ data.paymentMethod }}</td>
+          <td>Price</td>
+          <td>shippingPrice</td>
+          <td>totalPrice</td>
+          <td>
+            <button nz-button nzType="link">
+              <span nz-icon nzType="edit"></span>
+              Edit
+            </button>
+          </td>
+
+          <td>
+            <button nz-button nzType="link" nzDanger>
+              <span nz-icon nzType="delete"></span>
+              Delete
+            </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
