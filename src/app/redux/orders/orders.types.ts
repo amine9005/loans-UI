@@ -8,7 +8,7 @@ export interface order {
   totalPrice: number;
 }
 
-export interface productsArray extends Array<order> {
+export interface orderArray extends Array<order> {
   _id: string;
   orderItems: Array<string>;
   shippingAddress: string;
@@ -21,5 +21,5 @@ export interface productsArray extends Array<order> {
 export interface response {
   isLoading: boolean;
   error: boolean;
-  data: Array<productsArray> | any;
+  data: Array<orderArray> | any;
 }
