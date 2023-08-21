@@ -33,6 +33,7 @@ import { customersReducer } from './redux/customers/customers.reducer';
 
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { productsReducer } from './redux/products/products.reducer';
+import { ordersReducer } from './redux/orders/orders.reducer';
 
 registerLocaleData(en);
 
@@ -68,6 +69,7 @@ registerLocaleData(en);
       user: userAuthReducer,
       customers: customersReducer,
       products: productsReducer,
+      orders: ordersReducer,
     }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

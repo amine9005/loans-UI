@@ -1,4 +1,4 @@
-export const orderInit = {
+export const ordersInit = {
   isLoading: false,
   error: false,
   data: [],
