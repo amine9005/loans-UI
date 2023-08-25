@@ -16,13 +16,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of listOfData">
-          <!-- <td>
+          <td>
             <a nz-button nzType="link">Items</a>
           </td>
+          <td>{{ data.shippingAddress }}</td>
+          <td>{{ data.shippingPrice }}</td>
           <td>{{ data.paymentMethod }}</td>
-          <td>Price</td>
-          <td>shippingPrice</td>
-          <td>totalPrice</td>
+          <td>{{ data.itemsPrice }}</td>
+          <td>{{ data.totalPrice }}</td>
           <td>
             <button nz-button nzType="link">
               <span nz-icon nzType="edit"></span>
@@ -35,7 +36,7 @@
               <span nz-icon nzType="delete"></span>
               Delete
             </button>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </nz-table>
