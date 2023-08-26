@@ -25,6 +25,7 @@ export class AddComponent {
 
   submitForm(): void {
     this.invalid = false;
+    console.log('images array: ', JSON.stringify(this.imagesArray));
     if (this.validateForm.valid) {
       this.invalid = false;
       this.router.navigate(['products']);
@@ -43,6 +44,12 @@ export class AddComponent {
       this.imagesArray.push({ id: this.imagesCount - 1, path: '' });
       this.imagesCount += 1;
     }
+  }
+
+  setFilePath(value: string, id: number): void {
+    this.imagesArray.forEach((image) => {
+      console.log(`setFilePath`);
+    });
   }
 
   removeImage(): void {

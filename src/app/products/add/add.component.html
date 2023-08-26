@@ -133,10 +133,11 @@
             [nzPrefix]="prefixTemplateUser"
           >
             <input
+              id="{{ item.id }}"
               class="field"
               type="file"
               nz-input
-              value="file.jpg"
+              (change)="(setFilePath)"
               formControlName="thumbnail"
               accept=".png,.jpg,.jpeg"
               placeholder="Thumbnail"
