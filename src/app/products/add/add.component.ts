@@ -41,7 +41,7 @@ export class AddComponent {
 
   increaseImagesCount(): void {
     if (this.imagesArray.length < 10) {
-      this.imagesArray.push({ id: this.imagesCount - 1, path: '' });
+      this.imagesArray.push({ id: this.imagesCount, path: '' });
       this.imagesCount += 1;
     }
   }
@@ -57,7 +57,6 @@ export class AddComponent {
   removeImage(): void {
     if (this.imagesArray.length > 1) {
       this.imagesArray.pop();
-      this.imagesCount -= 1;
     }
   }
 
@@ -68,6 +67,10 @@ export class AddComponent {
       name: [null, [Validators.required]],
       price: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
+      featured: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      short_description: [null, [Validators.required]],
+      thumbnail: [null, [Validators.required]],
     });
   }
 }
