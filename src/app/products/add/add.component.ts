@@ -46,9 +46,11 @@ export class AddComponent {
     }
   }
 
-  setFilePath(value: string, id: number): void {
+  setFilePath(event: any, id: number): void {
     this.imagesArray.forEach((image) => {
-      console.log(`setFilePath`);
+      if (id == image.id) {
+        image.path = event.target.value;
+      }
     });
   }
 

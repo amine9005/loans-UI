@@ -137,7 +137,7 @@
               class="field"
               type="file"
               nz-input
-              (change)="(setFilePath)"
+              (change)="setFilePath($event, item.id)"
               formControlName="thumbnail"
               accept=".png,.jpg,.jpeg"
               placeholder="Thumbnail"
