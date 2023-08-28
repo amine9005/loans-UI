@@ -22,6 +22,11 @@ export class AddComponent {
     },
   ];
   imagesCount = 1;
+  slagValue = '';
+
+  updateSlag(event: any): void {
+    this.slagValue = event.target.value;
+  }
 
   submitForm(): void {
     this.invalid = false;

@@ -19,6 +19,7 @@
             formControlName="name"
             placeholder="Product Name"
             required
+            (change)="updateSlag($event)"
           />
         </nz-input-group>
       </nz-form-control>
@@ -32,7 +33,7 @@
           nz-input
           formControlName="slag"
           readonly
-          value="product-slag"
+          [value]="slagValue"
           required
         />
       </nz-input-group>
