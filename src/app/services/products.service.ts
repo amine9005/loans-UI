@@ -31,7 +31,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.post('/products', data, config);
+    return httpCommon.post('/products/add', data, config);
   }
 
   getProductById(id: string) {

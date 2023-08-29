@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { response } from 'src/app/redux/products/products.types';
+import { ProductsService } from '../../services/products.service';
 
 interface ProductImage {
   id: number;
@@ -23,6 +26,14 @@ export class AddComponent {
   ];
   imagesCount = 1;
   slagValue = '';
+  pictures: string[] = [];
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private store: Store<{ products: response }>,
+    private productsService: ProductsService
+  ) {}
 
   updateSlag(event: any): void {
     this.slagValue = event.target.value;
@@ -30,10 +41,26 @@ export class AddComponent {
 
   submitForm(): void {
     this.invalid = false;
-    console.log('images array: ', JSON.stringify(this.imagesArray));
+    // console.log('images array: ', JSON.stringify(this.imagesArray));
+    this.pictures.push(this.validateForm.value.thumbnail);
+    for (let i = 0; i < this.imagesArray.length; i++) {
+      this.pictures.push(this.imagesArray[i].path);
+    }
+    this.validateForm.value.pictures = this.pictures;
+    this.validateForm.value.slag = this.slagValue;
+    // console.log('product to be added: ', this.validateForm.value);
+
     if (this.validateForm.valid) {
       this.invalid = false;
-      this.router.navigate(['products']);
+      this.productsService
+        .addProduct(this.validateForm.value)
+        .then(() => {
+          // console.log('products added successfully: ', this.validateForm.value);
+          this.router.navigate(['products']);
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -65,14 +92,12 @@ export class AddComponent {
     }
   }
 
-  constructor(private router: Router, private fb: FormBuilder) {}
-
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       price: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
-      featured: [null, [Validators.required]],
+      featured: [false, [Validators.required]],
       description: [null, [Validators.required]],
       short_description: [null, [Validators.required]],
       thumbnail: [null, [Validators.required]],
