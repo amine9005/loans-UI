@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
   selectBy = 'Address';
-  selections = ['Address'];
+  selections = [
+    'Address',
+    'TotalPrice Greater Than',
+    'TotalPrice Lower Than',
+    'TotalPrice Equal Than',
+  ];
   searchTerm = '';
 
   searchBy(value: string): void {
