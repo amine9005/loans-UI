@@ -5,6 +5,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { setProducts } from 'src/app/redux/products/products.actions';
 
 interface Product {
+  _id: string;
   name: string;
   thumbnail: string;
   pictures: string;

@@ -43,7 +43,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/' + id, config);
+    return httpCommon.get('/products/' + id, config);
   }
 
   deleteProduct(id: string) {
@@ -55,7 +55,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.delete('/' + id, config);
+    return httpCommon.delete('/products/delete/' + id, config);
   }
 
   updateProduct(id: string, data: product) {
@@ -67,6 +67,6 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.put('/' + id, data, config);
+    return httpCommon.put('/products/update/' + id, data, config);
   }
 }

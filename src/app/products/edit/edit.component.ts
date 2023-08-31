@@ -5,6 +5,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ActivatedRoute } from '@angular/router';
 
 interface Product {
+  _id: string;
   name: string;
   thumbnail: string;
   pictures: string;
@@ -31,10 +32,15 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
-        this.productService.getProductById(params['id']).then((data) => {
-          console.log('Product: ', JSON.stringify(data));
-          this.product = data.data;
-        });
+        this.productService
+          .getProductById(params['id'])
+          .then((data) => {
+            console.log('Product: ', JSON.stringify(data.data['product']));
+            this.product = data.data['product'];
+          })
+          .catch((error) => {
+            console.log('error: ', JSON.stringify(error.message));
+          });
       }
     });
   }
