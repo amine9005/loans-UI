@@ -27,6 +27,7 @@ export class AddComponent {
   imagesCount = 1;
   slagValue = '';
   pictures: string[] = [];
+  thumbnail = '';
 
   constructor(
     private router: Router,
@@ -37,6 +38,10 @@ export class AddComponent {
 
   updateSlag(event: any): void {
     this.slagValue = event.target.value;
+  }
+
+  updateThumbnail(event: any): void {
+    this.thumbnail = event.target.value;
   }
 
   submitForm(): void {
