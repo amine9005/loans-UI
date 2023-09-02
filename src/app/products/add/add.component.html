@@ -31,7 +31,6 @@
           class="field"
           type="text"
           nz-input
-          formControlName="slag"
           readonly
           [value]="slagValue"
           required
@@ -106,10 +105,8 @@
         ></textarea>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <div class="img-holder">
-        <img [src]="thumbnail" alt="No image provided" />
-      </div>
+    <nz-form-item class="img-container">
+      <img [src]="thumbnail" [alt]="thumbnail" />
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please select an image">

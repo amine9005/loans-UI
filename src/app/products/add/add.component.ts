@@ -27,7 +27,7 @@ export class AddComponent {
   imagesCount = 1;
   slagValue = '';
   pictures: string[] = [];
-  thumbnail = '';
+  thumbnail = '/assets/images/cancel.png';
 
   constructor(
     private router: Router,
@@ -41,7 +41,15 @@ export class AddComponent {
   }
 
   updateThumbnail(event: any): void {
-    this.thumbnail = event.target.value;
+    if (event.target.files) {
+      const reader = new FileReader();
+      // console.log('path: ' + JSON.stringify(event.target.files[0]));
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (ev: any) => {
+        // console.log('path: ', ev.target.result);
+        this.thumbnail = ev.target.result;
+      };
+    }
   }
 
   submitForm(): void {

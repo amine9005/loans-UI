@@ -86,12 +86,18 @@ input{
   justify-content: center;
 }
 
-.img-holder{
+.img-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.img-container img {
+  width: 100px;
+  height: 100px;
+  // margin: auto;
+
+}
 .extend-images-btn{
   max-width: 200px;
   border-radius: 1rem;
