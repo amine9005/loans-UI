@@ -125,6 +125,9 @@
       </nz-form-control>
     </nz-form-item>
     <div *ngFor="let item of imagesArray">
+      <nz-form-item class="img-container">
+        <img [src]="item.path" [alt]="item.path" />
+      </nz-form-item>
       <nz-form-item>
         <nz-form-control
           nzErrorTip="Please Enter the product short description"

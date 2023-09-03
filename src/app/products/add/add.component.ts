@@ -21,7 +21,7 @@ export class AddComponent {
   imagesArray: Array<ProductImage> = [
     {
       id: 0,
-      path: '',
+      path: '/assets/images/cancel.png',
     },
   ];
   imagesCount = 1;
@@ -86,7 +86,10 @@ export class AddComponent {
 
   increaseImagesCount(): void {
     if (this.imagesArray.length < 10) {
-      this.imagesArray.push({ id: this.imagesCount, path: '' });
+      this.imagesArray.push({
+        id: this.imagesCount,
+        path: '/assets/images/cancel.png',
+      });
       this.imagesCount += 1;
     }
   }
@@ -94,7 +97,13 @@ export class AddComponent {
   setFilePath(event: any, id: number): void {
     this.imagesArray.forEach((image) => {
       if (id == image.id) {
-        image.path = event.target.value;
+        if (event.target.files) {
+          const reader = new FileReader();
+          reader.readAsDataURL(event.target.files[0]);
+          reader.onload = (ev: any) => {
+            image.path = ev.target.result;
+          };
+        }
       }
     });
   }
