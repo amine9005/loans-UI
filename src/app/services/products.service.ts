@@ -58,6 +58,18 @@ export class ProductsService {
     return httpCommon.delete('/products/delete/' + id, config);
   }
 
+  addPicture(path: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.post('/products/picture', { picture: path }, config);
+  }
+
   updateProduct(id: string, data: product) {
     let token = '';
     this.store.select('user').subscribe((data) => {
