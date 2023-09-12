@@ -55,13 +55,21 @@ export class AddComponent {
   submitForm(): void {
     this.invalid = false;
     // console.log('images array: ', JSON.stringify(this.imagesArray));
-    this.pictures.push(this.validateForm.value.thumbnail);
+    // this.pictures.push(this.validateForm.value.thumbnail);
     for (let i = 0; i < this.imagesArray.length; i++) {
-      this.pictures.push(this.imagesArray[i].path);
+      this.productsService
+        .addPicture(this.imagesArray[i].path)
+        .then((reps) => {
+          console.log('reps: ', JSON.stringify(reps));
+          this.pictures.push(this.imagesArray[i].path);
+        })
+        .catch((err) => {
+          console.log('unable to add picture ', err.message);
+        });
     }
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
-    // console.log('product to be added: ', this.validateForm.value);
+    console.log('product to be added: ', this.validateForm.value);
 
     if (this.validateForm.valid) {
       this.invalid = false;
