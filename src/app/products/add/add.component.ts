@@ -67,6 +67,7 @@ export class AddComponent {
           console.log('unable to add picture ', err.message);
         });
     }
+    this.validateForm.value.thumbnail = this.thumbnail;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
     console.log('product to be added: ', this.validateForm.value);
