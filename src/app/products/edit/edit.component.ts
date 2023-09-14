@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { response } from 'src/app/redux/products/products.types';
 import { ProductsService } from 'src/app/services/products.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-interface Product {
-  _id: string;
-  name: string;
-  thumbnail: string;
-  pictures: string;
-  slag: string;
-  price: string;
-  quantity: string;
+interface ProductImage {
+  id: number;
+  path: string;
 }
 @Component({
   selector: 'app-edit',
@@ -19,29 +16,122 @@ interface Product {
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit {
-  product?: Product;
+  validateForm!: FormGroup;
+  invalid = false;
+  imagesArray: Array<ProductImage> = [
+    {
+      id: 0,
+      path: '/assets/images/cancel.png',
+    },
+  ];
+  imagesCount = 1;
+  slagValue = '';
+  pictures: string[] = [];
+  thumbnail = '/assets/images/cancel.png';
 
   constructor(
-    private store: Store<{
-      products: response;
-    }>,
-    private productService: ProductsService,
-    private activatedRoute: ActivatedRoute
+    private router: Router,
+    private fb: FormBuilder,
+    private store: Store<{ products: response }>,
+    private productsService: ProductsService
   ) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['id']) {
-        this.productService
-          .getProductById(params['id'])
-          .then((data) => {
-            console.log('Product: ', JSON.stringify(data.data['product']));
-            this.product = data.data['product'];
-          })
-          .catch((error) => {
-            console.log('error: ', JSON.stringify(error.message));
-          });
+  updateSlag(event: any): void {
+    this.slagValue = event.target.value;
+  }
+
+  updateThumbnail(event: any): void {
+    if (event.target.files) {
+      const reader = new FileReader();
+      // console.log('path: ' + JSON.stringify(event.target.files[0]));
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (ev: any) => {
+        // console.log('path: ', ev.target.result);
+        this.thumbnail = ev.target.result;
+      };
+    }
+  }
+
+  submitForm(): void {
+    this.invalid = false;
+    // console.log('images array: ', JSON.stringify(this.imagesArray));
+    // this.pictures.push(this.validateForm.value.thumbnail);
+    for (let i = 0; i < this.imagesArray.length; i++) {
+      this.productsService
+        .addPicture(this.imagesArray[i].path)
+        .then((reps) => {
+          console.log('reps: ', JSON.stringify(reps));
+          this.pictures.push(this.imagesArray[i].path);
+        })
+        .catch((err) => {
+          console.log('unable to add picture ', err.message);
+        });
+    }
+    this.validateForm.value.thumbnail = this.thumbnail;
+    this.validateForm.value.pictures = this.pictures;
+    this.validateForm.value.slag = this.slagValue;
+    console.log('product to be added: ', this.validateForm.value);
+
+    if (this.validateForm.valid) {
+      this.invalid = false;
+      this.productsService
+        .addProduct(this.validateForm.value)
+        .then(() => {
+          // console.log('products added successfully: ', this.validateForm.value);
+          this.router.navigate(['products']);
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    } else {
+      Object.values(this.validateForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  increaseImagesCount(): void {
+    if (this.imagesArray.length < 10) {
+      this.imagesArray.push({
+        id: this.imagesCount,
+        path: '/assets/images/cancel.png',
+      });
+      this.imagesCount += 1;
+    }
+  }
+
+  setFilePath(event: any, id: number): void {
+    this.imagesArray.forEach((image) => {
+      if (id == image.id) {
+        if (event.target.files) {
+          const reader = new FileReader();
+          reader.readAsDataURL(event.target.files[0]);
+          reader.onload = (ev: any) => {
+            image.path = ev.target.result;
+          };
+        }
       }
+    });
+  }
+
+  removeImage(): void {
+    if (this.imagesArray.length > 1) {
+      this.imagesArray.pop();
+    }
+  }
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      name: [null, [Validators.required]],
+      price: [null, [Validators.required]],
+      quantity: [null, [Validators.required]],
+      featured: [false, [Validators.required]],
+      description: [null, [Validators.required]],
+      short_description: [null, [Validators.required]],
+      thumbnail: [null, [Validators.required]],
     });
   }
 }

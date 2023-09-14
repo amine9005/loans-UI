@@ -67,6 +67,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
+    console.log('data: ', JSON.stringify({ picture: path }));
     return httpCommon.post('/products/picture', { picture: path }, config);
   }
 
