@@ -3,12 +3,25 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { response } from 'src/app/redux/products/products.types';
 import { ProductsService } from 'src/app/services/products.service';
-import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 interface ProductImage {
   id: number;
   path: string;
+}
+
+export interface Product {
+  _id: string;
+  name: string;
+  thumbnail: Array<string>;
+  pictures: string;
+  slag: string;
+  price: number;
+  quantity: number;
+  featured: boolean;
+  description: string;
+  short_description: string;
 }
 @Component({
   selector: 'app-edit',
@@ -28,11 +41,13 @@ export class EditComponent implements OnInit {
   slagValue = '';
   pictures: string[] = [];
   thumbnail = '/assets/images/cancel.png';
+  product!: Product;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private store: Store<{ products: response }>,
+    private route: ActivatedRoute,
     private productsService: ProductsService
   ) {}
 
@@ -124,14 +139,32 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.productsService.getProductById()
+    let id = '';
+    this.route.params.subscribe((params) => {
+      console.log('params: ', JSON.stringify(params['id']));
+      id = params['id'];
+    });
+
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       price: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
-      featured: [false, [Validators.required]],
+      featured: [null, [Validators.required]],
       description: [null, [Validators.required]],
       short_description: [null, [Validators.required]],
       thumbnail: [null, [Validators.required]],
+      slag: [null, [Validators.required]],
     });
+
+    this.productsService
+      .getProductById(id)
+      .then((resp) => {
+        console.log('product: ', JSON.stringify(resp.data['product']));
+        this.product = resp.data['product'];
+      })
+      .catch((err) => {
+        console.log('error: ', err.message);
+      });
   }
 }

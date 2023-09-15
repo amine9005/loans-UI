@@ -18,6 +18,7 @@
             nz-input
             formControlName="name"
             placeholder="Product Name"
+            [value]="this.product.name"
             required
             (change)="updateSlag($event)"
           />
