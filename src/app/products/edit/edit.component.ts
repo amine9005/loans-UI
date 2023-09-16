@@ -14,8 +14,8 @@ interface ProductImage {
 export interface Product {
   _id: string;
   name: string;
-  thumbnail: Array<string>;
-  pictures: string;
+  thumbnail: string;
+  pictures: Array<string>;
   slag: string;
   price: number;
   quantity: number;
@@ -41,7 +41,18 @@ export class EditComponent implements OnInit {
   slagValue = '';
   pictures: string[] = [];
   thumbnail = '/assets/images/cancel.png';
-  product!: Product;
+  product: Product = {
+    _id: '',
+    name: '',
+    thumbnail: '',
+    pictures: [],
+    slag: '',
+    price: 0,
+    quantity: 0,
+    featured: false,
+    description: '',
+    short_description: '',
+  };
 
   constructor(
     private router: Router,
@@ -140,6 +151,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     // this.productsService.getProductById()
+
     let id = '';
     this.route.params.subscribe((params) => {
       console.log('params: ', JSON.stringify(params['id']));
@@ -155,6 +167,7 @@ export class EditComponent implements OnInit {
       short_description: [null, [Validators.required]],
       thumbnail: [null, [Validators.required]],
       slag: [null, [Validators.required]],
+      pictures: [null, [Validators.required]],
     });
 
     this.productsService
@@ -162,6 +175,9 @@ export class EditComponent implements OnInit {
       .then((resp) => {
         console.log('product: ', JSON.stringify(resp.data['product']));
         this.product = resp.data['product'];
+        this.slagValue = this.product.slag;
+        this.thumbnail = this.product.thumbnail;
+        this.pictures = this.product.pictures;
       })
       .catch((err) => {
         console.log('error: ', err.message);

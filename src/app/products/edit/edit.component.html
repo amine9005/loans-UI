@@ -47,6 +47,7 @@
             type="number"
             nz-input
             min="0"
+            [value]="this.product.quantity"
             formControlName="quantity"
             placeholder="Product Quantity"
             required
@@ -64,6 +65,7 @@
             nz-input
             min="0"
             formControlName="price"
+            [value]="this.product.price"
             placeholder="Product Price"
             required
           />
@@ -88,6 +90,7 @@
           formControlName="description"
           placeholder="Product description"
           [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+          [value]="this.product.description"
           required
         ></textarea>
       </nz-form-control>
@@ -100,6 +103,7 @@
           type="text"
           nz-input
           formControlName="short_description"
+          [value]="this.product.short_description"
           placeholder="short description"
           [nzAutosize]="{ minRows: 3, maxRows: 4 }"
           required
