@@ -46,4 +46,18 @@ export class ListComponent implements OnInit {
       }
     });
   }
+
+  deleteProduct(productId: string): void {
+    // this.router.navigate(['products']);
+
+    this.productService
+      .deleteProduct(productId)
+      .then((resp) => {
+        console.log('product deleted successfully');
+        this.ngOnInit();
+      })
+      .catch((err) => {
+        console.log('Unable to delete product: ' + err.message);
+      });
+  }
 }

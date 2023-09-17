@@ -67,7 +67,12 @@
           </td>
 
           <td>
-            <button nz-button nzType="link" nzDanger>
+            <button
+              nz-button
+              nzType="link"
+              nzDanger
+              (click)="deleteProduct(data._id)"
+            >
               <span nz-icon nzType="delete"></span>
               Delete
             </button>
