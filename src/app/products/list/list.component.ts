@@ -4,6 +4,7 @@ import { response } from 'src/app/redux/products/products.types';
 import { ProductsService } from 'src/app/services/products.service';
 import { setProducts } from 'src/app/redux/products/products.actions';
 
+
 interface Product {
   _id: string;
   name: string;
@@ -20,7 +21,7 @@ interface Product {
 })
 export class ListComponent implements OnInit {
   constructor(
-    private store: Store<{
+      private store: Store<{
       products: response;
     }>,
     private productService: ProductsService

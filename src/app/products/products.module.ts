@@ -11,6 +11,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ListComponent } from './list/list.component';
@@ -41,6 +42,7 @@ import { DeleteComponent } from './delete/delete.component';
     NzIconModule,
     ProductsRoutingModule,
     NzCheckboxModule,
+    NzPopconfirmModule,
   ],
 })
 export class ProductsModule {}

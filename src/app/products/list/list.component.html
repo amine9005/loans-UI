@@ -67,15 +67,16 @@
           </td>
 
           <td>
-            <button
-              nz-button
-              nzType="link"
-              nzDanger
-              (click)="deleteProduct(data._id)"
-            >
+            <a
+              nz-popconfirm
+              class='delete-link'
+              nzPopconfirmTitle="Are you sure delete this Product"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="deleteProduct(data._id)"
+                >
               <span nz-icon nzType="delete"></span>
               Delete
-            </button>
+          </a>
           </td>
         </tr>
       </tbody>
