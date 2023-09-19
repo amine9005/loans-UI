@@ -5,7 +5,7 @@ import { response } from 'src/app/redux/customers/customers.types';
 import { CustomersService } from 'src/app/services/customers.service';
 
 interface Person {
-  key: string;
+  _id: string;
   firstName: string;
   lastName: string;
   dob: number;
