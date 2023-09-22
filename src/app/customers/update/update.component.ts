@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import authService from '../../services/auth.service';
 import {
   FormBuilder,
   FormGroup,
@@ -16,5 +17,8 @@ export class UpdateComponent {
 
   submitForm(): void {
     console.log('Updating');
+    if (this.validateForm.valid) {
+      console.log('Validating');
+    }
   }
 }
