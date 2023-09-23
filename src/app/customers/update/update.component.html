@@ -16,6 +16,7 @@
             nz-input
             formControlName="name"
             placeholder="Name"
+            [value]="this.customer.firstName"
           />
         </nz-input-group>
       </nz-form-control>
@@ -30,6 +31,7 @@
             nz-input
             formControlName="lastName"
             placeholder="Last Name"
+            [value]="this.customer.lastName"
           />
         </nz-input-group>
       </nz-form-control>
@@ -44,6 +46,7 @@
             nz-input
             formControlName="email"
             placeholder="Email"
+            [value]="this.customer.email"
           />
         </nz-input-group>
       </nz-form-control>
@@ -58,34 +61,7 @@
             nz-input
             formControlName="dob"
             [max]="maxDate"
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your Password!">
-        <nz-input-group nzPrefixIcon="lock" class="field">
-          <input
-            class="field"
-            type="password"
-            nz-input
-            formControlName="password"
-            placeholder="Password"
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Password do not match!">
-        <nz-input-group nzPrefixIcon="lock" class="field">
-          <input
-            class="field"
-            type="password"
-            nz-input
-            formControlName="checkPassword"
-            placeholder="Confirm Password"
+            [value]="this.customer.dob"
           />
         </nz-input-group>
       </nz-form-control>

@@ -53,8 +53,6 @@ export class RegisterComponent implements OnInit {
       lastName: [null, [Validators.required]],
       name: [null, [Validators.required]],
       dob: [null, [Validators.required]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
     });
   }
 
