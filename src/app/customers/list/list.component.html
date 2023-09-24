@@ -15,16 +15,18 @@
         <tr *ngFor="let data of listOfData">
           <td>
             <a nz-button nzType="link">{{
-              data.firstName + " " + data.lastName
+              data.firstName +
+                (data.middleName ? " " + data.middleName : "") +
+                " " +
+                data.lastName
             }}</a>
           </td>
           <td>{{ data.dob }}</td>
           <td>{{ data.email }}</td>
           <td>
-            <button nz-button nzType="link">
-              <span nz-icon nzType="edit"></span>
-              <a href="customers/edit/{{ data._id }}">Edit</a>
-            </button>
+            <a class="link-btn" href="customers/edit/{{ data._id }}"
+              ><span nz-icon nzType="edit"></span> Edit</a
+            >
           </td>
 
           <td>

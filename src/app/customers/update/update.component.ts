@@ -14,9 +14,10 @@ export class UpdateComponent implements OnInit {
   customer = {
     email: '',
     lastName: '',
-    firstName: '',
+    name: '',
     dob: '',
   };
+  id = '';
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +28,21 @@ export class UpdateComponent implements OnInit {
   submitForm(): void {
     console.log('Updating');
     if (this.validateForm.valid) {
-      console.log('Validating');
+      this.customerService
+        .updateUser({
+          _id: this.id,
+          firstName: this.validateForm.value.name.split(' ')[0],
+          middleName: this.validateForm.value.name.split(' ')[1],
+          lastName: this.validateForm.value.lastName,
+          dob: this.validateForm.value.dob,
+          email: this.validateForm.value.email,
+        })
+        .then((resp) => {
+          console.log('user updated successfully ');
+        })
+        .catch((err) => {
+          console.log('err: ', err.message);
+        });
     }
   }
 
@@ -39,15 +54,18 @@ export class UpdateComponent implements OnInit {
       dob: [null, [Validators.required]],
     });
 
-    let id = '';
     this.route.params.subscribe((params) => {
       console.log('params: ', JSON.stringify(params['id']));
-      id = params['id'];
+      this.id = params['id'];
     });
 
-    this.customerService.getUserById(id).then((resp) => {
+    this.customerService.getUserById(this.id).then((resp) => {
       console.log('resp: ', JSON.stringify(resp));
-      this.customer.firstName = resp.data['user']['firstName'];
+      this.customer.name =
+        resp.data['user']['firstName'] +
+        (resp.data['user']['middleName']
+          ? ' ' + resp.data['user']['middleName']
+          : '');
       this.customer.email = resp.data['user']['email'];
       this.customer.lastName = resp.data['user']['lastName'];
       this.customer.dob = resp.data['user']['dob'];

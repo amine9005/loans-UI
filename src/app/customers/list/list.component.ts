@@ -7,6 +7,7 @@ import { CustomersService } from 'src/app/services/customers.service';
 interface Person {
   _id: string;
   firstName: string;
+  middleName: string;
   lastName: string;
   dob: number;
   email: string;
