@@ -48,6 +48,7 @@ export class CustomersService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
+    // console.log('customer: ', JSON.stringify(user));
     return httpCommon.put('/users/update/' + user._id, user, config);
   }
 
