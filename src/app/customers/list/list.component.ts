@@ -54,4 +54,17 @@ export class ListComponent implements OnInit {
       }
     });
   }
+
+  deleteCustomer(id: string) {
+    console.log('deleting Customer', id);
+    this.customerService
+      .deleteUserById(id)
+      .then((resp) => {
+        console.log('Customer deleted successfully: ', resp);
+        this.ngOnInit();
+      })
+      .catch((err) => {
+        console.log('Unable to delete customer: ', err.message);
+      });
+  }
 }

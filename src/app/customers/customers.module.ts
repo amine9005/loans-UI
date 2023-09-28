@@ -10,6 +10,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { CustomersRoutingModule } from './customers-routing.module';
 import { UpdateComponent } from './update/update.component';
@@ -39,6 +40,7 @@ import { SearchComponent } from './search/search.component';
     NzButtonModule,
     FormsModule,
     NzIconModule,
+    NzPopconfirmModule,
   ],
 })
 export class CustomersModule {}

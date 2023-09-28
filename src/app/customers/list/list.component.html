@@ -30,10 +30,16 @@
           </td>
 
           <td>
-            <button nz-button nzType="link" nzDanger>
+            <a
+              nz-popconfirm
+              class="delete-link"
+              nzPopconfirmTitle="Are you sure delete this Customer"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="deleteCustomer(data._id)"
+            >
               <span nz-icon nzType="delete"></span>
               Delete
-            </button>
+            </a>
           </td>
         </tr>
       </tbody>

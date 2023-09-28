@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomersService } from 'src/app/services/customers.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-update',
@@ -22,7 +22,8 @@ export class UpdateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customerService: CustomersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   submitForm(): void {
@@ -46,7 +47,8 @@ export class UpdateComponent implements OnInit {
           email: this.validateForm.value.email,
         })
         .then((resp) => {
-          console.log('user updated successfully ');
+          // console.log('user updated successfully ');
+          this.router.navigate(['customers']);
         })
         .catch((err) => {
           console.log('err: ', err.message);

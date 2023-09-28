@@ -52,6 +52,18 @@ export class CustomersService {
     return httpCommon.put('/users/update/' + user._id, user, config);
   }
 
+  deleteUserById(userId: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.delete('/users/delete/' + userId, config);
+  }
+
   getUserByEmail(email: string) {
     let token = '';
     this.store.select('user').subscribe((data) => {
