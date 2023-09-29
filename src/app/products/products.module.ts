@@ -18,16 +18,9 @@ import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { SearchComponent } from './search/search.component';
 import { AddComponent } from './add/add.component';
-import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
-  declarations: [
-    ListComponent,
-    EditComponent,
-    SearchComponent,
-    AddComponent,
-    DeleteComponent,
-  ],
+  declarations: [ListComponent, EditComponent, SearchComponent, AddComponent],
   imports: [
     CommonModule,
     NzTableModule,

@@ -16,7 +16,6 @@ import { CustomersRoutingModule } from './customers-routing.module';
 import { UpdateComponent } from './update/update.component';
 import { ReadComponent } from './read/read.component';
 import { ListComponent } from './list/list.component';
-import { DeleteComponent } from './delete/delete.component';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { SearchComponent } from './search/search.component';
     UpdateComponent,
     ReadComponent,
     ListComponent,
-    DeleteComponent,
     SearchComponent,
   ],
   imports: [
