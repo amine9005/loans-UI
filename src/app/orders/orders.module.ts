@@ -16,15 +16,10 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { ListComponent } from './list/list.component';
 import { SearchComponent } from './search/search.component';
 import { EditComponent } from './edit/edit.component';
-import { DeleteComponent } from './delete/delete.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
-  declarations: [
-    ListComponent,
-    SearchComponent,
-    EditComponent,
-    DeleteComponent,
-  ],
+  declarations: [ListComponent, SearchComponent, EditComponent, AddComponent],
   imports: [
     CommonModule,
     OrdersRoutingModule,
