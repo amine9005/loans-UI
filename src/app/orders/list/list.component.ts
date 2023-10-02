@@ -5,6 +5,7 @@ import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from 'src/app/services/orders.service';
 
 interface Order {
+  _id: string;
   orderItems: Array<string>;
   shippingAddress: string;
   paymentMethod: string;
@@ -52,5 +53,9 @@ export class ListComponent implements OnInit {
         this.listOfData = data.data['order'] as Order[];
       }
     });
+  }
+
+  deleteOrder(id: string) {
+    console.log('deleteOrder');
   }
 }
