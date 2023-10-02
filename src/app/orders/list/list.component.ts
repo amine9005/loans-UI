@@ -56,6 +56,14 @@ export class ListComponent implements OnInit {
   }
 
   deleteOrder(id: string) {
-    console.log('deleteOrder');
+    this.orderService
+      .deleteOrder(id)
+      .then((resp) => {
+        console.log('order deleted successfully');
+        this.ngOnInit();
+      })
+      .catch((err) => {
+        console.log('error deleting order', err.message);
+      });
   }
 }
