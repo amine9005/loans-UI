@@ -20,6 +20,7 @@ interface Order {
 })
 export class ListComponent implements OnInit {
   listOfData: Order[] = [];
+  invalid = false;
 
   constructor(
     private store: Store<{ orders: response }>,

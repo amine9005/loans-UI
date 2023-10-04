@@ -53,7 +53,6 @@ export class AddComponent {
   }
 
   submitForm(): void {
-    this.invalid = false;
     // console.log('images array: ', JSON.stringify(this.imagesArray));
     // this.pictures.push(this.validateForm.value.thumbnail);
     for (let i = 0; i < this.imagesArray.length; i++) {

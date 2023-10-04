@@ -60,23 +60,23 @@
             {{ data.quantity }}
           </td>
           <td>
-            <button nz-button nzType="link">
+            <a href="products/edit/{{ data._id }}">
               <span nz-icon nzType="edit"></span>
-              <a href="products/edit/{{ data._id }}">Edit</a>
-            </button>
+              Edit
+            </a>
           </td>
 
           <td>
             <a
               nz-popconfirm
-              class='delete-link'
+              class="delete-link"
               nzPopconfirmTitle="Are you sure delete this Product"
               nzPopconfirmPlacement="bottom"
               (nzOnConfirm)="deleteProduct(data._id)"
-                >
+            >
               <span nz-icon nzType="delete"></span>
               Delete
-          </a>
+            </a>
           </td>
         </tr>
       </tbody>
