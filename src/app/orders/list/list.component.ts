@@ -13,6 +13,12 @@ interface Order {
   shippingPrice: number;
   totalPrice: number;
 }
+
+interface OrderList {
+  id: string;
+  name: string;
+  price: number;
+}
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -21,6 +27,7 @@ interface Order {
 export class ListComponent implements OnInit {
   listOfData: Order[] = [];
   invalid = false;
+  OrderItems: Array<OrderList> = [];
 
   constructor(
     private store: Store<{ orders: response }>,
