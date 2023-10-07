@@ -27,23 +27,22 @@
         <input class="field" type="text" nz-input readonly required />
       </nz-input-group>
     </nz-form-item>
-
+-->
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please enter product quantity">
-        <nz-input-group nzPrefixIcon="book" class="field">
-          <input
-            class="field"
-            type="number"
-            nz-input
-            min="0"
-            formControlName="quantity"
-            placeholder="Product Quantity"
-            required
-          />
-        </nz-input-group>
-      </nz-form-control>
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
+          class="field"
+          type="number"
+          nz-input
+          readonly
+          min="0"
+          formControlName="totalPrice"
+          placeholder="Total Price"
+          required
+        />
+      </nz-input-group>
     </nz-form-item>
-
+    <!--
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter product price">
         <nz-input-group nzPrefixIcon="dollar" class="field">
