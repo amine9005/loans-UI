@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { setOrders } from 'src/app/redux/orders/orders.actions';
 import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from 'src/app/services/orders.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface Order {
   _id: string;
@@ -15,11 +14,6 @@ interface Order {
   totalPrice: number;
 }
 
-interface OrderList {
-  id: string;
-  name: string;
-  price: number;
-}
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -28,14 +22,10 @@ interface OrderList {
 export class ListComponent implements OnInit {
   listOfData: Order[] = [];
   invalid = false;
-  OrderItems: Array<OrderList> = [];
-  totalPrice = 0;
-  validateForm!: FormGroup;
 
   constructor(
     private store: Store<{ orders: response }>,
-    private orderService: OrdersService,
-    private fb: FormBuilder
+    private orderService: OrdersService
   ) {}
 
   ngOnInit(): void {
@@ -65,16 +55,6 @@ export class ListComponent implements OnInit {
         this.listOfData = data.data['order'] as Order[];
       }
     });
-
-    this.validateForm = this.fb.group({
-      totalPrice: [null, [Validators.required]],
-    });
-  }
-
-  updateTotalPrice(): void {
-    for (const obj of this.OrderItems) {
-      this.totalPrice += obj.price;
-    }
   }
 
   deleteOrder(id: string) {

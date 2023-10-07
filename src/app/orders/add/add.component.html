@@ -9,15 +9,19 @@
 
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter Order Items">
-        <nz-input-group nzPrefixIcon="edit" class="field">
-          <input
+        <nz-input-group nzPrefixIcon="bars" class="field">
+          <nz-select
             class="field"
-            type="text"
-            nz-input
-            formControlName="orderItems"
-            placeholder="Order Items"
-            required
-          />
+            nzMode="multiple"
+            nzPlaceHolder="Please select Products"
+            [(ngModel)]="listOfSelectedValue"
+          >
+            <nz-option
+              *ngFor="let item of listOfOption"
+              [nzLabel]="item"
+              [nzValue]="item"
+            ></nz-option>
+          </nz-select>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
