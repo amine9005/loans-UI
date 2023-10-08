@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from '../../services/orders.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 interface Order {
   _id: string;
@@ -29,14 +30,13 @@ export class AddComponent implements OnInit {
   validateForm!: FormGroup;
   OrderItems: Array<OrderList> = [];
   totalPrice = 0;
-  listOfOption: string[] = [];
-  listOfSelectedValue = ['a10', 'c12'];
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private store: Store<{ orders: response }>,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private productsService: ProductsService
   ) {}
 
   submitForm(): void {
@@ -59,10 +59,20 @@ export class AddComponent implements OnInit {
       totalPrice: [null, [Validators.required]],
     });
 
-    const children: string[] = [];
-    for (let i = 10; i < 36; i++) {
-      children.push(`${i.toString(36)}${i}`);
-    }
-    this.listOfOption = children;
+    this.productsService
+      .getProducts()
+      .then((products) => {
+        for (const prod of products.data['products']) {
+          console.log('prod', JSON.stringify(prod));
+          this.OrderItems.push({
+            id: prod._id,
+            name: prod.name,
+            price: prod.price,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('error: ' + error.message);
+      });
   }
 }

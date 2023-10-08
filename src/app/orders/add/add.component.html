@@ -14,12 +14,11 @@
             class="field"
             nzMode="multiple"
             nzPlaceHolder="Please select Products"
-            [(ngModel)]="listOfSelectedValue"
           >
             <nz-option
-              *ngFor="let item of listOfOption"
-              [nzLabel]="item"
-              [nzValue]="item"
+              *ngFor="let item of OrderItems"
+              [nzLabel]="item.name + ' ' + '$' + item.price"
+              [nzValue]="item.id"
             ></nz-option>
           </nz-select>
         </nz-input-group>
