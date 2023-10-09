@@ -14,6 +14,8 @@
             class="field"
             nzMode="multiple"
             nzPlaceHolder="Please select Products"
+            [(ngModel)]="selectedItems"
+            (change)="(updateTotalPrice)"
           >
             <nz-option
               *ngFor="let item of OrderItems"
@@ -41,6 +43,51 @@
           min="0"
           formControlName="totalPrice"
           placeholder="Total Price"
+          required
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          readonly
+          min="0"
+          formControlName="shippingAddress"
+          placeholder="Province"
+          required
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          readonly
+          min="0"
+          formControlName="shippingAddress"
+          placeholder="City"
+          required
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          readonly
+          min="0"
+          formControlName="shippingAddress"
+          placeholder="Zip Code"
           required
         />
       </nz-input-group>

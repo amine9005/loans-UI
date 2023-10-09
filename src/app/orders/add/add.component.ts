@@ -30,6 +30,7 @@ export class AddComponent implements OnInit {
   validateForm!: FormGroup;
   OrderItems: Array<OrderList> = [];
   totalPrice = 0;
+  selectedItems = '';
 
   constructor(
     private router: Router,
@@ -44,9 +45,10 @@ export class AddComponent implements OnInit {
   }
 
   updateTotalPrice(): void {
-    for (const obj of this.OrderItems) {
-      this.totalPrice += obj.price;
-    }
+    console.log('items: ', JSON.stringify(this.selectedItems));
+    // for (const obj of this.OrderItems) {
+    //   this.totalPrice += obj.price;
+    // }
   }
 
   ngOnInit(): void {
