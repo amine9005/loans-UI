@@ -54,7 +54,9 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       orderItems: [null, [Validators.required]],
-      shippingAddress: [null, [Validators.required]],
+      zipCode: [null, [Validators.required]],
+      province: [null, [Validators.required]],
+      city: [null, [Validators.required]],
       paymentMethod: [false, [Validators.required]],
       itemsPrice: [null, [Validators.required]],
       shippingPrice: [null, [Validators.required]],
