@@ -92,44 +92,36 @@
         />
       </nz-input-group>
     </nz-form-item>
-    <!--
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please enter product price">
-        <nz-input-group nzPrefixIcon="dollar" class="field">
-          <input
-            class="field"
-            type="number"
-            nz-input
-            min="0"
-            formControlName="price"
-            placeholder="Product Price"
-            required
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-
-    <div nz-row class="add-form-margin middle-row">
-      <div nz-col [nzSpan]="12">
-        <label nz-checkbox formControlName="featured">
-          <span>Featured</span>
-        </label>
-      </div>
-    </div>
 
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please Enter the product description">
-        <textarea
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
           class="field"
           type="text"
           nz-input
-          formControlName="description"
-          placeholder="Product description"
-          [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+          readonly
+          min="0"
+          formControlName="paymentMethod"
+          placeholder="Payment Method"
           required
-        ></textarea>
-      </nz-form-control>
-    </nz-form-item> -->
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="book" class="field">
+        <input
+          class="field"
+          type="text"
+          nz-input
+          readonly
+          min="0"
+          formControlName="shippingPrice"
+          placeholder="Shipping Price"
+          required
+        />
+      </nz-input-group>
+    </nz-form-item>
 
     <button
       nz-button
@@ -137,7 +129,7 @@
       class="add-form-button"
       nzSize="large"
     >
-      Add Product
+      Add Order
     </button>
   </form>
 </div>

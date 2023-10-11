@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
       zipCode: [null, [Validators.required]],
       province: [null, [Validators.required]],
       city: [null, [Validators.required]],
-      paymentMethod: [false, [Validators.required]],
+      paymentMethod: [null, [Validators.required]],
       itemsPrice: [null, [Validators.required]],
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
