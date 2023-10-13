@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
   validateForm!: FormGroup;
   OrderItems: Array<OrderList> = [];
   totalPrice = 0;
-  selectedItems = '';
+  selectedItems = ['here'];
 
   constructor(
     private router: Router,
@@ -42,9 +42,11 @@ export class AddComponent implements OnInit {
 
   submitForm(): void {
     console.log('submitForm');
+    this.updateTotalPrice();
   }
 
   updateTotalPrice(): void {
+    console.log('here is the price');
     console.log('items: ', JSON.stringify(this.selectedItems));
     // for (const obj of this.OrderItems) {
     //   this.totalPrice += obj.price;
