@@ -15,7 +15,7 @@
             nzMode="multiple"
             nzPlaceHolder="Please select Products"
             [(ngModel)]="selectedItems"
-            (change)="(updateTotalPrice)"
+            (nzOpenChange)="(updateTotalPrice)"
           >
             <nz-option
               *ngFor="let item of OrderItems"
