@@ -118,4 +118,40 @@ export class ProductsService {
     };
     return httpCommon.get('/getByPriceEqual/' + price, config);
   }
+
+  getProductByQuantityGreaterThan(quantity: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/getByQuantityGreater/' + quantity, config);
+  }
+
+  getProductByQuantityLowerThan(quantity: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/getByQuantityLower/' + quantity, config);
+  }
+
+  getProductByQuantityEqualTo(quantity: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/getByQuantityEqual/' + quantity, config);
+  }
 }
