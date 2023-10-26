@@ -92,7 +92,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByPriceGreater/' + price, config);
+    return httpCommon.get('/products/getByPriceGreater/' + price, config);
   }
 
   getProductByPriceLowerThan(price: string) {
@@ -104,7 +104,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByPriceLower/' + price, config);
+    return httpCommon.get('/products/getByPriceLower/' + price, config);
   }
 
   getProductByPriceEqualTo(price: string) {
@@ -116,7 +116,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByPriceEqual/' + price, config);
+    return httpCommon.get('/products/getByPriceEqual/' + price, config);
   }
 
   getProductByQuantityGreaterThan(quantity: string) {
@@ -128,7 +128,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByQuantityGreater/' + quantity, config);
+    return httpCommon.get('/products/getByQuantityGreater/' + quantity, config);
   }
 
   getProductByQuantityLowerThan(quantity: string) {
@@ -140,7 +140,7 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByQuantityLower/' + quantity, config);
+    return httpCommon.get('/products/getByQuantityLower/' + quantity, config);
   }
 
   getProductByQuantityEqualTo(quantity: string) {
@@ -152,6 +152,18 @@ export class ProductsService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/getByQuantityEqual/' + quantity, config);
+    return httpCommon.get('/products/getByQuantityEqual/' + quantity, config);
+  }
+
+  getProductByName(name: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/products/getByName/' + name, config);
   }
 }

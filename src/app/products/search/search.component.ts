@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-search',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
+  // constructor(private productService: ProductService) {}
   selectBy = 'By Name';
   selections = [
     'By Name',
@@ -24,6 +26,8 @@ export class SearchComponent {
   }
 
   search() {
-    console.log('Searching...');
+    if (this.selectBy == 'By Name') {
+      console.log('Searching...');
+    }
   }
 }
