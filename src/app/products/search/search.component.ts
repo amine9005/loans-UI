@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
+import { Store } from '@ngrx/store';
+import { setProducts } from 'src/app/redux/products/products.actions';
+import { response } from 'src/app/redux/products/products.types';
 
 @Component({
   selector: 'app-search',
@@ -7,7 +10,10 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  // constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductsService,
+    private store: Store<{ products: response }>
+  ) {}
   selectBy = 'By Name';
   selections = [
     'By Name',
@@ -27,7 +33,14 @@ export class SearchComponent {
 
   search() {
     if (this.selectBy == 'By Name') {
-      console.log('Searching...');
+      this.productService
+        .getProductByName(this.selectBy)
+        .then((products) => {
+          console.log('products by name: ', JSON.stringify(products['data']));
+        })
+        .catch((error) => {
+          console.log('error: ', error);
+        });
     }
   }
 }
