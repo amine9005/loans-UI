@@ -27,19 +27,25 @@ export class SearchComponent {
   ];
   searchTerm = '';
 
-  searchBy(value: string): void {
-    this.selectBy = value;
+  searchBy(event: any): void {
+    this.searchTerm = event.target.value;
   }
 
   search() {
     if (this.selectBy == 'By Name') {
       this.productService
-        .getProductByName(this.selectBy)
+        .getProductByName(this.searchTerm)
         .then((products) => {
-          console.log('products by name: ', JSON.stringify(products['data']));
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
         })
         .catch((error) => {
-          console.log('error: ', error);
+          console.log('error: ', error.message);
         });
     }
   }
