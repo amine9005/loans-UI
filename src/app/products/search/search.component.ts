@@ -17,7 +17,6 @@ export class SearchComponent {
   selectBy = 'By Name';
   selections = [
     'By Name',
-    'By Id',
     'Price Greater Than',
     'Price Lower Than',
     'Price Equal To',
@@ -35,6 +34,57 @@ export class SearchComponent {
     if (this.selectBy == 'By Name') {
       this.productService
         .getProductByName(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
+
+    if (this.selectBy == 'Price Greater Than') {
+      this.productService
+        .getProductByPriceGreaterThan(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
+
+    if (this.selectBy == 'Price Lower Than') {
+      this.productService
+        .getProductByPriceLowerThan(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
+
+    if (this.selectBy == 'Price Equal To') {
+      this.productService
+        .getProductByPriceEqualTo(this.searchTerm)
         .then((products) => {
           this.store.dispatch(
             setProducts({
