@@ -98,5 +98,56 @@ export class SearchComponent {
           console.log('error: ', error.message);
         });
     }
+
+    if (this.selectBy == 'Quantity Greater Than') {
+      this.productService
+        .getProductByPriceEqualTo(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
+
+    if (this.selectBy == 'Quantity Lower Than') {
+      this.productService
+        .getProductByQuantityLowerThan(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
+
+    if (this.selectBy == 'Quantity Equal To') {
+      this.productService
+        .getProductByQuantityEqualTo(this.searchTerm)
+        .then((products) => {
+          this.store.dispatch(
+            setProducts({
+              isLoading: false,
+              error: false,
+              data: products['data'],
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error: ', error.message);
+        });
+    }
   }
 }
