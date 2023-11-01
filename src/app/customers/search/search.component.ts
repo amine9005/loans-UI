@@ -66,6 +66,25 @@ export class SearchComponent {
             setCustomers({ isLoading: false, error: false, data: [] })
           );
         });
+    } else if (this.selectBy === 'By Name') {
+      this.customerService
+        .getUserByName(this.searchTerm)
+        .then((user) => {
+          console.log('User ' + JSON.stringify(user));
+          this.store.dispatch(
+            setCustomers({
+              isLoading: false,
+              error: false,
+              data: user.data,
+            })
+          );
+        })
+        .catch((error) => {
+          console.log('error ' + JSON.stringify(error));
+          this.store.dispatch(
+            setCustomers({ isLoading: false, error: false, data: [] })
+          );
+        });
     }
   }
 }
