@@ -69,7 +69,7 @@ export class OrdersService {
     return httpCommon.get('/orders/orders/' + id, config);
   }
 
-  getOrderByTotalPrice(totalPrice: string) {
+  getOrderByTotalPriceEqual(totalPrice: string) {
     let token = '';
     this.store.select('user').subscribe((data) => {
       token = data.token;
@@ -79,5 +79,32 @@ export class OrdersService {
       headers: { Authorization: `Bearer ${token}` },
     };
     return httpCommon.get('/orders/getByTotalPriceEqual/' + totalPrice, config);
+  }
+
+  getOrderByTotalPriceGreater(totalPrice: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get(
+      '/orders/getByTotalPriceGreater/' + totalPrice,
+      config
+    );
+  }
+
+  getOrderByTotalPriceLower(totalPrice: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/orders/getByTotalPriceLower/' + totalPrice, config);
   }
 }
