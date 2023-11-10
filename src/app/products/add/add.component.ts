@@ -44,10 +44,23 @@ export class AddComponent {
     if (event.target.files) {
       const reader = new FileReader();
       // console.log('path: ' + JSON.stringify(event.target.files[0]));
-      reader.readAsDataURL(event.target.files[0]);
+      const file = event.target.files[0];
+      const formData = new FormData();
+      reader.readAsDataURL(file);
       reader.onload = (ev: any) => {
         // console.log('path: ', ev.target.result);
         this.thumbnail = ev.target.result;
+        formData.append('picture', this.thumbnail);
+        console.log('thumbnail: ', JSON.stringify(this.thumbnail));
+
+        this.productsService
+          .addPicture(formData)
+          .then((resp) => {
+            console.log('resp: ', JSON.stringify(resp));
+          })
+          .catch((err) => {
+            console.log('err: ', JSON.stringify(err));
+          });
       };
     }
   }
