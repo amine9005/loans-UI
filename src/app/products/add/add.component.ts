@@ -46,39 +46,38 @@ export class AddComponent {
       // console.log('path: ' + JSON.stringify(event.target.files[0]));
       const file = event.target.files[0];
       const formData = new FormData();
-      reader.readAsDataURL(file);
-      reader.onload = (ev: any) => {
-        // console.log('path: ', ev.target.result);
-        this.thumbnail = ev.target.result;
-        formData.append('picture', this.thumbnail);
-        console.log('thumbnail: ', JSON.stringify(this.thumbnail));
+      formData.append('picture', file);
 
-        this.productsService
-          .addPicture(formData)
-          .then((resp) => {
-            console.log('resp: ', JSON.stringify(resp));
-          })
-          .catch((err) => {
-            console.log('err: ', JSON.stringify(err));
-          });
-      };
+      this.productsService
+        .addPicture(formData)
+        .then((resp) => {
+          // console.log('resp: ', JSON.stringify(resp));
+          reader.readAsDataURL(file);
+          reader.onload = (ev: any) => {
+            // console.log('path: ', ev.target.result);
+            this.thumbnail = ev.target.result;
+          };
+        })
+        .catch((err) => {
+          console.log('err: ', JSON.stringify(err));
+        });
     }
   }
 
   submitForm(): void {
     // console.log('images array: ', JSON.stringify(this.imagesArray));
     // this.pictures.push(this.validateForm.value.thumbnail);
-    for (let i = 0; i < this.imagesArray.length; i++) {
-      this.productsService
-        .addPicture(this.imagesArray[i].path)
-        .then((reps) => {
-          console.log('reps: ', JSON.stringify(reps));
-          this.pictures.push(this.imagesArray[i].path);
-        })
-        .catch((err) => {
-          console.log('unable to add picture ', err.message);
-        });
-    }
+    // for (let i = 0; i < this.imagesArray.length; i++) {
+    // this.productsService
+    //   .addPicture(this.imagesArray[i].path)
+    //   .then((reps) => {
+    //     console.log('reps: ', JSON.stringify(reps));
+    //     this.pictures.push(this.imagesArray[i].path);
+    //   })
+    //   .catch((err) => {
+    //     console.log('unable to add picture ', err.message);
+    //   });
+    // }
     this.validateForm.value.thumbnail = this.thumbnail;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;

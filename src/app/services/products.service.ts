@@ -58,7 +58,7 @@ export class ProductsService {
     return httpCommon.delete('/products/delete/' + id, config);
   }
 
-  addPicture(data: any) {
+  addPicture(formData: FormData) {
     let token = '';
     this.store.select('user').subscribe((data) => {
       token = data.token;
@@ -70,8 +70,7 @@ export class ProductsService {
         'Content-Type': 'multipart/form-data',
       },
     };
-    console.log('data: ', JSON.stringify({ data }));
-    return httpCommon.post('/products/picture', data, config);
+    return httpCommon.post('/products/picture', formData, config);
   }
 
   updateProduct(id: string, data: product) {

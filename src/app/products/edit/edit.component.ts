@@ -82,17 +82,17 @@ export class EditComponent implements OnInit {
     this.invalid = false;
     // console.log('images array: ', JSON.stringify(this.imagesArray));
     // this.pictures.push(this.validateForm.value.thumbnail);
-    for (let i = 0; i < this.imagesArray.length; i++) {
-      this.productsService
-        .addPicture(this.imagesArray[i].path)
-        .then((reps) => {
-          console.log('reps: ', JSON.stringify(reps));
-          this.pictures.push(this.imagesArray[i].path);
-        })
-        .catch((err) => {
-          console.log('unable to add picture ', err.message);
-        });
-    }
+    // for (let i = 0; i < this.imagesArray.length; i++) {
+    //   this.productsService
+    //     .addPicture(this.imagesArray[i].path)
+    //     .then((reps) => {
+    //       console.log('reps: ', JSON.stringify(reps));
+    //       this.pictures.push(this.imagesArray[i].path);
+    //     })
+    //     .catch((err) => {
+    //       console.log('unable to add picture ', err.message);
+    //     });
+    // }
     this.validateForm.value.thumbnail = this.thumbnail;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
