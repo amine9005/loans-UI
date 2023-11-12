@@ -8,6 +8,7 @@ import { ProductsService } from '../../services/products.service';
 interface ProductImage {
   id: number;
   path: string;
+  file: FormData | null;
 }
 
 @Component({
@@ -22,6 +23,7 @@ export class AddComponent {
     {
       id: 0,
       path: '/assets/images/cancel.png',
+      file: null,
     },
   ];
   imagesCount = 1;
@@ -65,19 +67,19 @@ export class AddComponent {
   }
 
   submitForm(): void {
-    // console.log('images array: ', JSON.stringify(this.imagesArray));
-    // this.pictures.push(this.validateForm.value.thumbnail);
-    // for (let i = 0; i < this.imagesArray.length; i++) {
-    // this.productsService
-    //   .addPicture(this.imagesArray[i].path)
-    //   .then((reps) => {
-    //     console.log('reps: ', JSON.stringify(reps));
-    //     this.pictures.push(this.imagesArray[i].path);
-    //   })
-    //   .catch((err) => {
-    //     console.log('unable to add picture ', err.message);
-    //   });
-    // }
+    console.log('images array: ', JSON.stringify(this.imagesArray));
+    this.pictures.push(this.validateForm.value.thumbnail);
+    for (let i = 0; i < this.imagesArray.length; i++) {
+      this.productsService
+        .addPicture(this.imagesArray[i].file as FormData)
+        .then((reps) => {
+          console.log('reps: ', JSON.stringify(reps));
+          this.pictures.push(this.imagesArray[i].path);
+        })
+        .catch((err) => {
+          console.log('unable to add picture ', err.message);
+        });
+    }
     this.validateForm.value.thumbnail = this.thumbnail;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
@@ -109,6 +111,7 @@ export class AddComponent {
       this.imagesArray.push({
         id: this.imagesCount,
         path: '/assets/images/cancel.png',
+        file: null,
       });
       this.imagesCount += 1;
     }
