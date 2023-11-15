@@ -107,4 +107,16 @@ export class OrdersService {
     };
     return httpCommon.get('/orders/getByTotalPriceLower/' + totalPrice, config);
   }
+
+  getOrderByAddress(address: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/orders/getByAddress/' + address, config);
+  }
 }
