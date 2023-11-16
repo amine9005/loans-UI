@@ -8,7 +8,7 @@ import { ProductsService } from '../../services/products.service';
 interface ProductImage {
   id: number;
   path: string;
-  file: FormData | null;
+  file: any;
 }
 
 @Component({
@@ -58,6 +58,29 @@ export class AddComponent {
           reader.onload = (ev: any) => {
             // console.log('path: ', ev.target.result);
             this.thumbnail = ev.target.result;
+          };
+        })
+        .catch((err) => {
+          console.log('err: ', JSON.stringify(err));
+        });
+    }
+  }
+
+  savePicture(event: any): void {
+    if (event.target.files) {
+      const reader = new FileReader();
+      // console.log('path: ' + JSON.stringify(event.target.files[0]));
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('picture', file);
+
+      this.productsService
+        .addPicture(formData)
+        .then((resp) => {
+          // console.log('resp: ', JSON.stringify(resp));
+          reader.readAsDataURL(file);
+          reader.onload = (ev: any) => {
+            // console.log('path: ', ev.target.result);
           };
         })
         .catch((err) => {

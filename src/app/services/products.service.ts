@@ -70,6 +70,7 @@ export class ProductsService {
         'Content-Type': 'multipart/form-data',
       },
     };
+    console.log('form data: ' + JSON.stringify(formData));
     return httpCommon.post('/products/picture', formData, config);
   }
 

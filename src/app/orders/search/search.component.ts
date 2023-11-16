@@ -9,9 +9,9 @@ export class SearchComponent {
   selectBy = 'Address';
   selections = [
     'Address',
-    'TotalPrice Greater Than',
-    'TotalPrice Lower Than',
-    'TotalPrice Equal Than',
+    'Total Price Greater Than',
+    'Total Price Lower Than',
+    'Total Price Equal Than',
   ];
   searchTerm = '';
 
