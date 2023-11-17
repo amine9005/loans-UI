@@ -30,6 +30,7 @@ export class AddComponent {
   slagValue = '';
   pictures: string[] = [];
   thumbnail = '/assets/images/cancel.png';
+  thumbnailPath = '';
 
   constructor(
     private router: Router,
@@ -45,19 +46,17 @@ export class AddComponent {
   updateThumbnail(event: any): void {
     if (event.target.files) {
       const reader = new FileReader();
-      // console.log('path: ' + JSON.stringify(event.target.files[0]));
       const file = event.target.files[0];
       const formData = new FormData();
-      formData.append('picture', file);
 
+      formData.append('picture', file);
       this.productsService
         .addPicture(formData)
         .then((resp) => {
-          // console.log('resp: ', JSON.stringify(resp));
           reader.readAsDataURL(file);
           reader.onload = (ev: any) => {
-            // console.log('path: ', ev.target.result);
             this.thumbnail = ev.target.result;
+            this.thumbnailPath = resp.data['path'];
           };
         })
         .catch((err) => {
@@ -66,47 +65,41 @@ export class AddComponent {
     }
   }
 
-  savePicture(event: any): void {
-    if (event.target.files) {
-      const reader = new FileReader();
-      // console.log('path: ' + JSON.stringify(event.target.files[0]));
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append('picture', file);
+  setFilePath(event: any, id: number): void {
+    this.imagesArray.forEach((image) => {
+      if (id == image.id) {
+        if (event.target.files) {
+          const reader = new FileReader();
+          const file = event.target.files[0];
 
-      this.productsService
-        .addPicture(formData)
-        .then((resp) => {
-          // console.log('resp: ', JSON.stringify(resp));
-          reader.readAsDataURL(file);
-          reader.onload = (ev: any) => {
-            // console.log('path: ', ev.target.result);
-          };
-        })
-        .catch((err) => {
-          console.log('err: ', JSON.stringify(err));
-        });
-    }
+          const formData = new FormData();
+          formData.append('picture', file);
+
+          this.productsService
+            .addPicture(formData)
+            .then((resp) => {
+              reader.readAsDataURL(file);
+              reader.onload = (ev: any) => {
+                image.path = ev.target.result;
+                image.file = resp.data['path'];
+              };
+            })
+            .catch((err) => {
+              console.log('unable to add image to list: ', err.message);
+            });
+        }
+      }
+    });
   }
 
-  submitForm(): void {
-    console.log('images array: ', JSON.stringify(this.imagesArray));
-    this.pictures.push(this.validateForm.value.thumbnail);
-    for (let i = 0; i < this.imagesArray.length; i++) {
-      this.productsService
-        .addPicture(this.imagesArray[i].file as FormData)
-        .then((reps) => {
-          console.log('reps: ', JSON.stringify(reps));
-          this.pictures.push(this.imagesArray[i].path);
-        })
-        .catch((err) => {
-          console.log('unable to add picture ', err.message);
-        });
-    }
-    this.validateForm.value.thumbnail = this.thumbnail;
+  submitForm(): any {
+    this.imagesArray.forEach((image) => {
+      this.pictures.push(image.file);
+    });
+    this.validateForm.value.thumbnail = this.thumbnailPath;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
-    console.log('product to be added: ', this.validateForm.value);
+    // console.log('product to be added: ', this.validateForm.value);
 
     if (this.validateForm.valid) {
       this.invalid = false;
@@ -138,20 +131,6 @@ export class AddComponent {
       });
       this.imagesCount += 1;
     }
-  }
-
-  setFilePath(event: any, id: number): void {
-    this.imagesArray.forEach((image) => {
-      if (id == image.id) {
-        if (event.target.files) {
-          const reader = new FileReader();
-          reader.readAsDataURL(event.target.files[0]);
-          reader.onload = (ev: any) => {
-            image.path = ev.target.result;
-          };
-        }
-      }
-    });
   }
 
   removeImage(): void {
