@@ -123,6 +123,7 @@
             formControlName="thumbnail"
             accept=".png,.jpg,.jpeg"
             placeholder="Thumbnail"
+            [value]="this.thumbnail"
             (change)="updateThumbnail($event)"
             required
           />
@@ -148,6 +149,7 @@
               type="file"
               nz-input
               (change)="setFilePath($event, item.id)"
+              [value]="item.path"
               formControlName="thumbnail"
               accept=".png,.jpg,.jpeg"
               placeholder="Thumbnail"
@@ -166,18 +168,6 @@
               class="remove-img-btn"
             ></span>
           </ng-template>
-
-          <!-- <nz-input-group nzPrefixIcon="file-image" class="file-field">
-            <input
-              class="field"
-              type="file"
-              nz-input
-              formControlName="thumbnail"
-              accept=".png,.jpg,.jpeg"
-              placeholder="Thumbnail"
-              multiple
-            />
-          </nz-input-group> -->
         </nz-form-control>
       </nz-form-item>
     </div>

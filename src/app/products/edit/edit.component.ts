@@ -178,6 +178,7 @@ export class EditComponent implements OnInit {
         this.slagValue = this.product.slag;
         this.thumbnail = this.product.thumbnail;
         this.pictures = this.product.pictures;
+        console.log('picture: ', JSON.stringify(this.product.pictures));
       })
       .catch((err) => {
         console.log('error: ', err.message);
