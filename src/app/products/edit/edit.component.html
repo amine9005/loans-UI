@@ -123,7 +123,6 @@
             formControlName="thumbnail"
             accept=".png,.jpg,.jpeg"
             placeholder="Thumbnail"
-            [value]="this.thumbnail"
             (change)="updateThumbnail($event)"
             required
           />
@@ -135,40 +134,39 @@
         <img [src]="item.path" [alt]="item.path" />
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control
+        <!-- <nz-form-control
           nzErrorTip="Please Enter the product short description"
+        > -->
+        <nz-input-group
+          class="file-field"
+          [nzSuffix]="suffixTemplateInfo"
+          [nzPrefix]="prefixTemplateUser"
         >
-          <nz-input-group
-            class="file-field"
-            [nzSuffix]="suffixTemplateInfo"
-            [nzPrefix]="prefixTemplateUser"
-          >
-            <input
-              id="{{ item.id }}"
-              class="field"
-              type="file"
-              nz-input
-              (change)="setFilePath($event, item.id)"
-              [value]="item.path"
-              formControlName="thumbnail"
-              accept=".png,.jpg,.jpeg"
-              placeholder="Thumbnail"
-              multiple
-            />
-          </nz-input-group>
-          <ng-template #prefixTemplateUser
-            ><span nz-icon nzType="file-image"></span
-          ></ng-template>
-          <ng-template #suffixTemplateInfo>
-            <span
-              nz-icon
-              nz-button
-              (click)="removeImage()"
-              nzType="minus-circle"
-              class="remove-img-btn"
-            ></span>
-          </ng-template>
-        </nz-form-control>
+          <input
+            id="{{ item.id }}"
+            class="field"
+            type="file"
+            nz-input
+            (change)="setFilePath($event, item.id)"
+            formControlName="thumbnail"
+            accept=".png,.jpg,.jpeg"
+            placeholder="Thumbnail"
+            multiple
+          />
+        </nz-input-group>
+        <ng-template #prefixTemplateUser
+          ><span nz-icon nzType="file-image"></span
+        ></ng-template>
+        <ng-template #suffixTemplateInfo>
+          <span
+            nz-icon
+            nz-button
+            (click)="removeImage()"
+            nzType="minus-circle"
+            class="remove-img-btn"
+          ></span>
+        </ng-template>
+        <!-- </nz-form-control> -->
       </nz-form-item>
     </div>
 
