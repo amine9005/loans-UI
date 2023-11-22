@@ -169,4 +169,16 @@ export class ProductsService {
     };
     return httpCommon.get('/products/getByName/' + name, config);
   }
+
+  getImage(name: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/products/getImage/' + name, config);
+  }
 }
