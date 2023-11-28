@@ -149,9 +149,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    // this.productsService.getProductById()
-
+  async ngOnInit(): Promise<void> {
     let id = '';
     this.route.params.subscribe((params) => {
       console.log('params: ', JSON.stringify(params['id']));
@@ -170,15 +168,38 @@ export class EditComponent implements OnInit {
       pictures: [null, [Validators.required]],
     });
 
-    this.productsService
+    await this.productsService
       .getProductById(id)
       .then((resp) => {
         console.log('product: ', JSON.stringify(resp.data['product']));
         this.product = resp.data['product'];
         this.slagValue = this.product.slag;
-        this.thumbnail = this.product.thumbnail;
-        this.pictures = this.product.pictures;
-        console.log('picture: ', JSON.stringify(this.product.pictures));
+        this.productsService
+          .getImage(this.product.thumbnail.split('\\')[2])
+          .then((resp) => {
+            this.thumbnail = 'data:image/jpeg;base64,' + resp.data;
+          })
+          .catch((err) => {
+            console.log('error: ', err.message);
+          });
+        this.imagesArray = [];
+        for (let i = 0; i < this.product.pictures.length; i++) {
+          const name = this.product.pictures[i].split('\\')[2];
+          this.productsService
+            .getImage(name)
+            .then((resp) => {
+              this.imagesArray.push({
+                id: i,
+                path: 'data:image/jpeg;base64,' + resp.data,
+              });
+            })
+            .catch((err) => {
+              console.log(
+                'Unable to load image: ' + name + ' error: ',
+                err.message
+              );
+            });
+        }
       })
       .catch((err) => {
         console.log('error: ', err.message);
