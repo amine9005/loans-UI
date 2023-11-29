@@ -19,8 +19,8 @@
             formControlName="name"
             placeholder="Product Name"
             [value]="this.product.name"
-            required
             (change)="updateSlag($event)"
+            required
           />
         </nz-input-group>
       </nz-form-control>
@@ -34,7 +34,6 @@
           nz-input
           readonly
           [value]="slagValue"
-          required
         />
       </nz-input-group>
     </nz-form-item>
@@ -105,8 +104,8 @@
           formControlName="short_description"
           [value]="this.product.short_description"
           placeholder="short description"
-          [nzAutosize]="{ minRows: 3, maxRows: 4 }"
           required
+          [nzAutosize]="{ minRows: 3, maxRows: 4 }"
         ></textarea>
       </nz-form-control>
     </nz-form-item>
@@ -134,26 +133,26 @@
         <img [src]="item.path" [alt]="item.path" />
       </nz-form-item>
       <nz-form-item>
-        <!-- <nz-form-control
-          nzErrorTip="Please Enter the product short description"
-        > -->
-        <nz-input-group
-          class="file-field"
-          [nzSuffix]="suffixTemplateInfo"
-          [nzPrefix]="prefixTemplateUser"
-        >
-          <input
-            id="{{ item.id }}"
-            class="field"
-            type="file"
-            nz-input
-            (change)="setFilePath($event, item.id)"
-            formControlName="thumbnail"
-            accept=".png,.jpg,.jpeg"
-            placeholder="Thumbnail"
-            multiple
-          />
-        </nz-input-group>
+        <nz-form-control nzErrorTip="Please select an Image">
+          <nz-input-group
+            class="file-field"
+            [nzSuffix]="suffixTemplateInfo"
+            [nzPrefix]="prefixTemplateUser"
+          >
+            <input
+              id="{{ item.id }}"
+              class="field"
+              type="file"
+              nz-input
+              (change)="setFilePath($event, item.id)"
+              formControlName="thumbnail"
+              accept=".png,.jpg,.jpeg"
+              placeholder="Thumbnail"
+              required
+            />
+          </nz-input-group>
+        </nz-form-control>
+
         <ng-template #prefixTemplateUser
           ><span nz-icon nzType="file-image"></span
         ></ng-template>
@@ -166,7 +165,6 @@
             class="remove-img-btn"
           ></span>
         </ng-template>
-        <!-- </nz-form-control> -->
       </nz-form-item>
     </div>
 

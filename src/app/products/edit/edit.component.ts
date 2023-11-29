@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 interface ProductImage {
   id: number;
   path: string;
+  file: any;
 }
 
 export interface Product {
@@ -35,12 +36,14 @@ export class EditComponent implements OnInit {
     {
       id: 0,
       path: '/assets/images/cancel.png',
+      file: null,
     },
   ];
   imagesCount = 1;
   slagValue = '';
   pictures: string[] = [];
   thumbnail = '/assets/images/cancel.png';
+  thumbnailPath = '';
   product: Product = {
     _id: '',
     name: '',
@@ -69,34 +72,56 @@ export class EditComponent implements OnInit {
   updateThumbnail(event: any): void {
     if (event.target.files) {
       const reader = new FileReader();
-      // console.log('path: ' + JSON.stringify(event.target.files[0]));
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (ev: any) => {
-        // console.log('path: ', ev.target.result);
-        this.thumbnail = ev.target.result;
-      };
+      const file = event.target.files[0];
+      const formData = new FormData();
+
+      formData.append('picture', file);
+      this.productsService
+        .addPicture(formData)
+        .then((resp) => {
+          reader.readAsDataURL(file);
+          reader.onload = (ev: any) => {
+            this.thumbnail = ev.target.result;
+            this.thumbnailPath = resp.data['path'];
+          };
+        })
+        .catch((err) => {
+          console.log('err: ', JSON.stringify(err));
+        });
     }
   }
 
   submitForm(): void {
-    this.invalid = false;
-    // console.log('images array: ', JSON.stringify(this.imagesArray));
-    // this.pictures.push(this.validateForm.value.thumbnail);
-    // for (let i = 0; i < this.imagesArray.length; i++) {
-    //   this.productsService
-    //     .addPicture(this.imagesArray[i].path)
-    //     .then((reps) => {
-    //       console.log('reps: ', JSON.stringify(reps));
-    //       this.pictures.push(this.imagesArray[i].path);
-    //     })
-    //     .catch((err) => {
-    //       console.log('unable to add picture ', err.message);
-    //     });
-    // }
-    this.validateForm.value.thumbnail = this.thumbnail;
+    this.imagesArray.forEach((image) => {
+      this.pictures.push(image.file);
+    });
+    this.validateForm.value.thumbnail = this.thumbnailPath;
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.value.slag = this.slagValue;
+
+    if (!this.validateForm.value.name) {
+      this.validateForm.value.name = this.product.name;
+    }
+    if (!this.validateForm.value.quantity) {
+      this.validateForm.value.quantity = this.product.quantity;
+    }
+    if (!this.validateForm.value.price) {
+      this.validateForm.value.price = this.product.price;
+    }
+    if (this.validateForm.value.featured === null) {
+      this.validateForm.value.featured = this.product.featured;
+    }
+    if (!this.validateForm.value.description) {
+      this.validateForm.value.description = this.product.description;
+    }
+    if (!this.validateForm.value.short_description) {
+      this.validateForm.value.short_description =
+        this.product.short_description;
+    }
     console.log('product to be added: ', this.validateForm.value);
+    console.log('valid: ', this.validateForm.valid);
+
+    this.validateForm.updateValueAndValidity();
 
     if (this.validateForm.valid) {
       this.invalid = false;
@@ -111,6 +136,7 @@ export class EditComponent implements OnInit {
         });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
+        console.log('control: ', control.invalid);
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -124,6 +150,7 @@ export class EditComponent implements OnInit {
       this.imagesArray.push({
         id: this.imagesCount,
         path: '/assets/images/cancel.png',
+        file: null,
       });
       this.imagesCount += 1;
     }
@@ -134,10 +161,23 @@ export class EditComponent implements OnInit {
       if (id == image.id) {
         if (event.target.files) {
           const reader = new FileReader();
-          reader.readAsDataURL(event.target.files[0]);
-          reader.onload = (ev: any) => {
-            image.path = ev.target.result;
-          };
+          const file = event.target.files[0];
+
+          const formData = new FormData();
+          formData.append('picture', file);
+
+          this.productsService
+            .addPicture(formData)
+            .then((resp) => {
+              reader.readAsDataURL(file);
+              reader.onload = (ev: any) => {
+                image.path = ev.target.result;
+                image.file = resp.data['path'];
+              };
+            })
+            .catch((err) => {
+              console.log('unable to add image to list: ', err.message);
+            });
         }
       }
     });
@@ -178,6 +218,7 @@ export class EditComponent implements OnInit {
           .getImage(this.product.thumbnail.split('\\')[2])
           .then((resp) => {
             this.thumbnail = 'data:image/jpeg;base64,' + resp.data;
+            this.thumbnailPath = this.product.thumbnail;
           })
           .catch((err) => {
             console.log('error: ', err.message);
@@ -191,6 +232,7 @@ export class EditComponent implements OnInit {
               this.imagesArray.push({
                 id: i,
                 path: 'data:image/jpeg;base64,' + resp.data,
+                file: this.product.pictures[i],
               });
             })
             .catch((err) => {
