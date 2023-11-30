@@ -74,17 +74,33 @@ export class ProductsService {
     return httpCommon.post('/products/picture', formData, config);
   }
 
-  updateProduct(id: string, data: product) {
+  updateProduct(id: string, formData: FormData) {
     let token = '';
     this.store.select('user').subscribe((data) => {
       token = data.token;
     });
     const config = {
       withCredentials: true,
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
     };
-    return httpCommon.put('/products/update/' + id, data, config);
+    console.log('form data: ' + JSON.stringify(formData));
+    return httpCommon.post('/products/update/' + id, formData, config);
   }
+
+  // updateProduct(id: string, data: product) {
+  //   let token = '';
+  //   this.store.select('user').subscribe((data) => {
+  //     token = data.token;
+  //   });
+  //   const config = {
+  //     withCredentials: true,
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   };
+  //   return httpCommon.put('/products/update/' + id, data, config);
+  // }
 
   getProductByPriceGreaterThan(price: string) {
     let token = '';

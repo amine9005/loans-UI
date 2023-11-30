@@ -95,28 +95,37 @@ export class EditComponent implements OnInit {
     this.imagesArray.forEach((image) => {
       this.pictures.push(image.file);
     });
+    // this.validateForm.controls['thumbnail'].setValue(this.thumbnailPath);
     this.validateForm.value.thumbnail = this.thumbnailPath;
+    // this.validateForm.controls['pictures'].setValue(this.pictures);
     this.validateForm.value.pictures = this.pictures;
-    this.validateForm.value.slag = this.slagValue;
-
+    // this.validateForm.controls['slag'].setValue(this.slagValue);
+    if (this.slagValue === null) {
+      this.validateForm.value.slag = this.slagValue;
+    }
+    console.log('here is the');
     if (!this.validateForm.value.name) {
-      this.validateForm.value.name = this.product.name;
+      this.validateForm.controls['name'].setValue(this.product.name);
     }
     if (!this.validateForm.value.quantity) {
-      this.validateForm.value.quantity = this.product.quantity;
+      this.validateForm.controls['quantity'].setValue(this.product.quantity);
     }
     if (!this.validateForm.value.price) {
-      this.validateForm.value.price = this.product.price;
+      this.validateForm.controls['price'].setValue(this.product.price);
     }
     if (this.validateForm.value.featured === null) {
-      this.validateForm.value.featured = this.product.featured;
+      this.validateForm.controls['featured'].setValue(this.product.featured);
     }
     if (!this.validateForm.value.description) {
       this.validateForm.value.description = this.product.description;
+      this.validateForm.controls['description'].setValue(
+        this.product.description
+      );
     }
     if (!this.validateForm.value.short_description) {
-      this.validateForm.value.short_description =
-        this.product.short_description;
+      this.validateForm.controls['short_description'].setValue(
+        this.product.short_description
+      );
     }
     console.log('product to be added: ', this.validateForm.value);
     console.log('valid: ', this.validateForm.valid);
@@ -126,7 +135,7 @@ export class EditComponent implements OnInit {
     if (this.validateForm.valid) {
       this.invalid = false;
       this.productsService
-        .addProduct(this.validateForm.value)
+        .updateProduct(this.product._id, this.validateForm.value)
         .then(() => {
           // console.log('products added successfully: ', this.validateForm.value);
           this.router.navigate(['products']);
@@ -135,8 +144,8 @@ export class EditComponent implements OnInit {
           console.log('error: ', error.message);
         });
     } else {
+      console.log('control: ', this.validateForm.valid);
       Object.values(this.validateForm.controls).forEach((control) => {
-        console.log('control: ', control.invalid);
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -213,12 +222,14 @@ export class EditComponent implements OnInit {
       .then((resp) => {
         console.log('product: ', JSON.stringify(resp.data['product']));
         this.product = resp.data['product'];
-        this.slagValue = this.product.slag;
+        this.slagValue = this.product['slag'];
+        console.log('slag: ', this.slagValue);
         this.productsService
           .getImage(this.product.thumbnail.split('\\')[2])
           .then((resp) => {
             this.thumbnail = 'data:image/jpeg;base64,' + resp.data;
             this.thumbnailPath = this.product.thumbnail;
+            console.log('thumbnailPath: ', this.thumbnailPath);
           })
           .catch((err) => {
             console.log('error: ', err.message);
