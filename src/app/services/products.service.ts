@@ -81,13 +81,10 @@ export class ProductsService {
     });
     const config = {
       withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
+      headers: { Authorization: `Bearer ${token}` },
     };
     console.log('form data: ' + JSON.stringify(formData));
-    return httpCommon.post('/products/update/' + id, formData, config);
+    return httpCommon.put('/products/update/' + id, formData, config);
   }
 
   // updateProduct(id: string, data: product) {

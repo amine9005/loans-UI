@@ -95,15 +95,7 @@ export class EditComponent implements OnInit {
     this.imagesArray.forEach((image) => {
       this.pictures.push(image.file);
     });
-    // this.validateForm.controls['thumbnail'].setValue(this.thumbnailPath);
-    this.validateForm.value.thumbnail = this.thumbnailPath;
-    // this.validateForm.controls['pictures'].setValue(this.pictures);
-    this.validateForm.value.pictures = this.pictures;
-    // this.validateForm.controls['slag'].setValue(this.slagValue);
-    if (this.slagValue === null) {
-      this.validateForm.value.slag = this.slagValue;
-    }
-    console.log('here is the');
+
     if (!this.validateForm.value.name) {
       this.validateForm.controls['name'].setValue(this.product.name);
     }
@@ -127,10 +119,37 @@ export class EditComponent implements OnInit {
         this.product.short_description
       );
     }
-    console.log('product to be added: ', this.validateForm.value);
-    console.log('valid: ', this.validateForm.valid);
 
-    this.validateForm.updateValueAndValidity();
+    if (this.validateForm.value.slag === null) {
+      this.validateForm.controls['slag'].setValue(this.slagValue);
+    }
+    // console.log('thumbnailPath sub: ', this.thumbnailPath);
+
+    // this.validateForm.controls['thumbnail'].setValue(this.thumbnailPath);
+    this.validateForm.value.thumbnail = this.thumbnailPath;
+    this.validateForm.controls['thumbnail'].setErrors(null);
+
+    // this.validateForm.controls['pictures'].setValue(this.pictures);
+    this.validateForm.value.pictures = this.pictures;
+    this.validateForm.controls['pictures'].setErrors(null);
+
+    // this.validateForm.controls['slag'].setValue(this.slagValue);
+    // console.log('pictures next: ', this.validateForm.value.thumbnail);
+
+    // console.log('product to be added: ', this.validateForm.value);
+    // console.log('valid: ', this.validateForm.valid);
+    // console.log('name: ', this.validateForm.controls['name']);
+    // console.log('quantity: ', this.validateForm.controls['quantity']);
+    // console.log('price: ', this.validateForm.controls['price']);
+    // console.log('featured: ', this.validateForm.controls['featured']);
+    // console.log('description: ', this.validateForm.controls['description']);
+    // console.log(
+    //   'short_description: ',
+    //   this.validateForm.controls['short_description']
+    // );
+    // console.log('slag: ', this.validateForm.controls['slag']);
+    // console.log('thumbnail: ', this.validateForm.controls['thumbnail']);
+    // console.log('pictures: ', this.validateForm.controls['pictures']);
 
     if (this.validateForm.valid) {
       this.invalid = false;
