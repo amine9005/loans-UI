@@ -30,6 +30,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { StoreModule } from '@ngrx/store';
 import { userAuthReducer } from './redux/auth/auth.reducer';
 import { customersReducer } from './redux/customers/customers.reducer';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { productsReducer } from './redux/products/products.reducer';
@@ -71,6 +73,8 @@ registerLocaleData(en);
       products: productsReducer,
       orders: ordersReducer,
     }),
+    NzTableModule,
+    NzDividerModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 
