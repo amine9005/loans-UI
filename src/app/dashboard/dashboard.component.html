@@ -1,5 +1,41 @@
-<div nz-row>
-  <div nz-col nzSpan="8">Sold Products</div>
-  <div nz-col nzSpan="8">Inventory</div>
-  <div nz-col nzSpan="8">Incoming</div>
+<div nz-row [nzGutter]="[30, 0]" class="container">
+  <div nz-col nzSpan="8" class="card-container">
+    <div nz-row>
+      <div nz-col nzSpan="4">
+        <span nz-icon nzType="dollar" class="pic" nzTheme="outline"></span>
+      </div>
+      <div nz-col nzSpan="20">
+        <div class="card">
+          <h2>Total Sales</h2>
+          <p>70</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="8" class="card-container">
+    <div nz-row>
+      <div nz-col nzSpan="4">
+        <span nz-icon nzType="shopping" class="pic" nzTheme="outline"></span>
+      </div>
+      <div nz-col nzSpan="20">
+        <div class="card">
+          <h2>Total Orders</h2>
+          <p>70</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="8" class="card-container">
+    <div nz-row>
+      <div nz-col nzSpan="4">
+        <span nz-icon nzType="shop" class="pic" nzTheme="outline"></span>
+      </div>
+      <div nz-col nzSpan="20">
+        <div class="card">
+          <h2>Total Products</h2>
+          <p>70</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

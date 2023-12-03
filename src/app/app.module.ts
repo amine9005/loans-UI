@@ -32,6 +32,7 @@ import { userAuthReducer } from './redux/auth/auth.reducer';
 import { customersReducer } from './redux/customers/customers.reducer';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { productsReducer } from './redux/products/products.reducer';
@@ -75,6 +76,7 @@ registerLocaleData(en);
     }),
     NzTableModule,
     NzDividerModule,
+    NzCardModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 
