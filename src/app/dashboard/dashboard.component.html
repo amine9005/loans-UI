@@ -1,35 +1,51 @@
-<div class="container">
-  <div class="card-container">
-    <div class="pic-container">
-      <span nz-icon nzType="dollar" class="pic-cash" nzTheme="outline"></span>
+<div class="body-container">
+  <div class="container">
+    <div class="card-container">
+      <div class="pic-container">
+        <span nz-icon nzType="dollar" class="pic-cash" nzTheme="outline"></span>
+      </div>
+      <div>
+        <div class="card">
+          <strong>Total Sales</strong>
+          <p>${{ totalSales }}</p>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="card">
-        <strong>Total Sales</strong>
-        <p>${{ totalSales }}</p>
+    <div class="card-container">
+      <div class="pic-container">
+        <span
+          nz-icon
+          nzType="shopping"
+          class="pic-bag"
+          nzTheme="outline"
+        ></span>
+      </div>
+      <div>
+        <div class="card">
+          <strong>Total Orders</strong>
+          <p>{{ totalOrders }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="pic-container">
+        <span nz-icon nzType="shop" class="pic-store" nzTheme="outline"></span>
+      </div>
+      <div>
+        <div class="card">
+          <strong>Total Products</strong>
+          <p>{{ totalProducts }}</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card-container">
-    <div class="pic-container">
-      <span nz-icon nzType="shopping" class="pic-bag" nzTheme="outline"></span>
-    </div>
-    <div>
-      <div class="card">
-        <strong>Total Orders</strong>
-        <p>{{ totalOrders }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="card-container">
-    <div class="pic-container">
-      <span nz-icon nzType="shop" class="pic-store" nzTheme="outline"></span>
-    </div>
-    <div>
-      <div class="card">
-        <strong>Total Products</strong>
-        <p>{{ totalProducts }}</p>
-      </div>
-    </div>
+  <div class="charts-container">
+    <canvas
+      baseChart
+      width="600"
+      height="400"
+      type="line"
+      [data]="lineChartData"
+    ></canvas>
   </div>
 </div>

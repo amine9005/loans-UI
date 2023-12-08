@@ -37,6 +37,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { productsReducer } from './redux/products/products.reducer';
 import { ordersReducer } from './redux/orders/orders.reducer';
+import { NgChartsModule } from 'ng2-charts';
 
 registerLocaleData(en);
 
@@ -77,6 +78,7 @@ registerLocaleData(en);
     NzTableModule,
     NzDividerModule,
     NzCardModule,
+    NgChartsModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 
