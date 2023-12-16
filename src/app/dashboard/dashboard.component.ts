@@ -28,5 +28,15 @@ export class DashboardComponent implements OnInit {
         this.totalProducts = -1;
         console.log('error: ', err.message);
       });
+
+    this.dashboardService
+      .getTotalOrders()
+      .then((resp) => {
+        this.totalOrders = resp.data['products'];
+      })
+      .catch((err) => {
+        this.totalOrders = -1;
+        console.log('error: ', err.message);
+      });
   }
 }

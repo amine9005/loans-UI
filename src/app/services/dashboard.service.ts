@@ -20,7 +20,7 @@ export class DashboardService {
     return httpCommon.get('/dashboard/totalSales', config);
   }
 
-  getTotalProducts() {
+  getTotalOrders() {
     let token = '';
     this.store.select('user').subscribe((data) => {
       token = data.token;
@@ -29,7 +29,7 @@ export class DashboardService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/dashboard/totalProducts', config);
+    return httpCommon.get('/dashboard/ordersCount', config);
   }
 
   getInventory() {
