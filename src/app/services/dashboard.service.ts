@@ -41,6 +41,6 @@ export class DashboardService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/dashboard/inventory', config);
+    return httpCommon.get('/dashboard/inventorySize', config);
   }
 }

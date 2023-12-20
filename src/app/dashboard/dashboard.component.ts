@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService
       .getTotalOrders()
       .then((resp) => {
-        this.totalOrders = resp.data['products'];
+        this.totalOrders = resp.data['orders'];
       })
       .catch((err) => {
         this.totalOrders = -1;
