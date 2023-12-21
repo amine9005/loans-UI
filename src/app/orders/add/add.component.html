@@ -14,11 +14,11 @@
             class="field"
             nzMode="multiple"
             nzPlaceHolder="Please select Products"
-            [(ngModel)]="selectedItems"
-            (nzOpenChange)="(updateTotalPrice)"
+            formControlName="orderItems"
+            (ngModelChange)="calculateTotalPrice()"
           >
             <nz-option
-              *ngFor="let item of OrderItems"
+              *ngFor="let item of Products"
               [nzLabel]="item.name + ' ' + '$' + item.price"
               [nzValue]="item.id"
             ></nz-option>

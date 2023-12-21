@@ -28,7 +28,7 @@ interface OrderList {
 })
 export class AddComponent implements OnInit {
   validateForm!: FormGroup;
-  OrderItems: Array<OrderList> = [];
+  Products: Array<OrderList> = [];
   totalPrice = 0;
   selectedItems = ['here'];
 
@@ -42,12 +42,12 @@ export class AddComponent implements OnInit {
 
   submitForm(): void {
     console.log('submitForm');
-    this.updateTotalPrice();
+    this.calculateTotalPrice();
   }
 
-  updateTotalPrice(): void {
+  calculateTotalPrice(): void {
     console.log('here is the price');
-    console.log('items: ', JSON.stringify(this.selectedItems));
+    console.log('items: ', JSON.stringify(this.validateForm.value.orderItems));
     // for (const obj of this.OrderItems) {
     //   this.totalPrice += obj.price;
     // }
@@ -69,8 +69,8 @@ export class AddComponent implements OnInit {
       .getProducts()
       .then((products) => {
         for (const prod of products.data['products']) {
-          console.log('prod', JSON.stringify(prod));
-          this.OrderItems.push({
+          // console.log('prod', JSON.stringify(prod));
+          this.Products.push({
             id: prod._id,
             name: prod.name,
             price: prod.price,
