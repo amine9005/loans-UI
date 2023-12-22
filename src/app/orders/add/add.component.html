@@ -20,7 +20,7 @@
             <nz-option
               *ngFor="let item of Products"
               [nzLabel]="item.name + ' ' + '$' + item.price"
-              [nzValue]="item.id"
+              [nzValue]="item.id + '-' + item.price"
             ></nz-option>
           </nz-select>
         </nz-input-group>

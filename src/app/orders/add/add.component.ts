@@ -48,9 +48,17 @@ export class AddComponent implements OnInit {
   calculateTotalPrice(): void {
     console.log('here is the price');
     console.log('items: ', JSON.stringify(this.validateForm.value.orderItems));
-    // for (const obj of this.OrderItems) {
-    //   this.totalPrice += obj.price;
-    // }
+    const items = this.validateForm.value.orderItems;
+    this.totalPrice = 0;
+    for (const item of items) {
+      // const id = item.split('-')[0];
+      const price = parseFloat(item.split('-')[1]);
+      this.totalPrice += price;
+    }
+    console.log('total price: ', this.totalPrice);
+    this.validateForm.patchValue({
+      totalPrice: this.totalPrice,
+    });
   }
 
   ngOnInit(): void {
@@ -60,7 +68,6 @@ export class AddComponent implements OnInit {
       province: [null, [Validators.required]],
       city: [null, [Validators.required]],
       paymentMethod: [null, [Validators.required]],
-      itemsPrice: [null, [Validators.required]],
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
     });
