@@ -31,6 +31,7 @@ export class AddComponent implements OnInit {
   Products: Array<OrderList> = [];
   totalPrice = 0;
   selectedItems = ['here'];
+  paymentMethods = ['PayPal', 'Visa', 'MasterCard', 'American Express'];
 
   constructor(
     private router: Router,
