@@ -32,6 +32,7 @@ export class AddComponent implements OnInit {
   totalPrice = 0;
   selectedItems = ['here'];
   paymentMethods = ['PayPal', 'Visa', 'MasterCard', 'American Express'];
+  invalid = false;
 
   constructor(
     private router: Router,
@@ -42,13 +43,44 @@ export class AddComponent implements OnInit {
   ) {}
 
   submitForm(): void {
-    console.log('submitForm');
-    this.calculateTotalPrice();
+    if (this.validateForm.valid) {
+      const items = this.validateForm.value.orderItems as Array<string>;
+      for (let i = 0; i < items.length; i++) {
+        // const id = item.split('-')[0];
+        items[i] = items[i].split('-')[0];
+      }
+      this.validateForm.patchValue({
+        orderItems: items,
+        totalPrice: this.totalPrice,
+      });
+      (this.validateForm.value.shippingAddress =
+        this.validateForm.value.city +
+        ', ' +
+        this.validateForm.value.province +
+        ', ' +
+        this.validateForm.value.zipCode),
+        (this.invalid = false);
+
+      this.ordersService
+        .addOrder(this.validateForm.value)
+        .then((resp) => {
+          this.router.navigate(['orders']);
+        })
+        .catch((err) => {
+          console.log('Unable to add order: ', err.message);
+        });
+    } else {
+      Object.values(this.validateForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   calculateTotalPrice(): void {
-    console.log('here is the price');
-    console.log('items: ', JSON.stringify(this.validateForm.value.orderItems));
+    // console.log('here');
     const items = this.validateForm.value.orderItems;
     this.totalPrice = 0;
     for (const item of items) {
@@ -56,7 +88,7 @@ export class AddComponent implements OnInit {
       const price = parseFloat(item.split('-')[1]);
       this.totalPrice += price;
     }
-    console.log('total price: ', this.totalPrice);
+    // console.log('total price: ', this.totalPrice);
     this.validateForm.patchValue({
       totalPrice: this.totalPrice,
     });

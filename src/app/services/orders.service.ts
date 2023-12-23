@@ -30,7 +30,7 @@ export class OrdersService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.post('/orders', data, config);
+    return httpCommon.post('/orders/add', data, config);
   }
 
   updateOrder(id: string, data: order) {
