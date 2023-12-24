@@ -11,6 +11,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { ListComponent } from './list/list.component';
@@ -34,6 +35,7 @@ import { AddComponent } from './add/add.component';
     FormsModule,
     NzButtonModule,
     NzIconModule,
+    NzPopconfirmModule,
   ],
 })
 export class OrdersModule {}
