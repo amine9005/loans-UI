@@ -1,1 +1,136 @@
-<p>edit works!</p>
+<div class="container">
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    class="add-form"
+    (ngSubmit)="submitForm()"
+  >
+    <h2 class="title" nz-typography>Edit Order</h2>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter Order Items">
+        <nz-input-group nzPrefixIcon="bars" class="field">
+          <nz-select
+            class="field"
+            nzMode="multiple"
+            nzPlaceHolder="Please select Products"
+            formControlName="orderItems"
+            (ngModelChange)="calculateTotalPrice()"
+          >
+            <nz-option
+              *ngFor="let item of Products"
+              [nzLabel]="item.name + ' ' + '$' + item.price"
+              [nzValue]="item.id + '-' + item.price"
+            ></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-input-group nzPrefixIcon="dollar" class="field">
+        <input
+          class="field"
+          type="number"
+          nz-input
+          readonly
+          min="0"
+          formControlName="totalPrice"
+          placeholder="Total Price"
+          required
+        />
+      </nz-input-group>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter the Province Name">
+        <nz-input-group nzPrefixIcon="environment" class="field">
+          <input
+            class="field"
+            type="text"
+            nz-input
+            min="0"
+            formControlName="province"
+            placeholder="Province"
+            required
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter the City Name">
+        <nz-input-group nzPrefixIcon="environment" class="field">
+          <input
+            class="field"
+            type="text"
+            nz-input
+            min="0"
+            formControlName="city"
+            placeholder="City"
+            required
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter a valid Zip Code">
+        <nz-input-group nzPrefixIcon="environment" class="field">
+          <input
+            class="field"
+            type="number"
+            nz-input
+            min="0"
+            formControlName="zipCode"
+            placeholder="Zip Code"
+            required
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter a Payment Method">
+        <nz-input-group nzPrefixIcon="credit-card" class="field">
+          <nz-select
+            class="field"
+            nzPlaceHolder="Payment Method"
+            formControlName="paymentMethod"
+          >
+            <nz-option
+              *ngFor="let item of paymentMethods"
+              [nzLabel]="item"
+              [nzValue]="item"
+            ></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter the Shipping Price">
+        <nz-input-group nzPrefixIcon="shopping-cart" class="field">
+          <input
+            class="field"
+            type="number"
+            nz-input
+            min="0"
+            formControlName="shippingPrice"
+            placeholder="Shipping Price"
+            required
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button
+      nz-button
+      [nzType]="'primary'"
+      class="add-form-button"
+      nzSize="large"
+    >
+      Edit Order
+    </button>
+  </form>
+</div>

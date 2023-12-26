@@ -6,16 +6,6 @@ import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from '../../services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
 
-interface Order {
-  _id: string;
-  orderItems: Array<string>;
-  shippingAddress: string;
-  paymentMethod: string;
-  itemsPrice: Array<number>;
-  shippingPrice: number;
-  totalPrice: number;
-}
-
 interface OrderList {
   id: string;
   name: string;

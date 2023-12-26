@@ -6,7 +6,7 @@ import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   { path: '', component: ListComponent },
-  { path: 'update', component: EditComponent },
+  { path: 'edit/:id', component: EditComponent },
   { path: 'add', component: AddComponent },
 ];
 
