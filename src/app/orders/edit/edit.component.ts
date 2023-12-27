@@ -1,11 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrdersService } from 'src/app/services/orders.service';
 
 interface OrderList {
   id: string;
   name: string;
   price: number;
+}
+
+interface Order {
+  id: string;
+  orderItems: Array<string>;
+  paymentMethod: string;
+  province: string;
+  city: string;
+  zipCode: number;
+  shippingPrice: number;
+  totalPrice: number;
+  _v: number;
 }
 @Component({
   selector: 'app-edit',
@@ -19,14 +32,26 @@ export class EditComponent implements OnInit {
   selectedItems = ['here'];
   paymentMethods = ['PayPal', 'Visa', 'MasterCard', 'American Express'];
   invalid = false;
+  currentOrder: Order = {
+    id: '',
+    orderItems: [],
+    paymentMethod: '',
+    province: '',
+    city: '',
+    zipCode: 0,
+    shippingPrice: 0,
+    totalPrice: 0,
+    _v: 0,
+  };
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private orderService: OrdersService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit(): Promise<any> {
     let id = '';
     this.route.params.subscribe((params) => {
       console.log('params: ', JSON.stringify(params['id']));
@@ -42,6 +67,31 @@ export class EditComponent implements OnInit {
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
     });
+
+    await this.orderService
+      .getOrderById(id)
+      .then((resp) => {
+        console.log('order obj: ', resp);
+        const data = resp.data['order'][0];
+        this.currentOrder._v = data['__v'];
+        this.currentOrder.id = data['_id'];
+        this.currentOrder.city = data['city'];
+        this.currentOrder.shippingPrice = data['shippingPrice'];
+        this.currentOrder.totalPrice = data['totalPrice'];
+        this.currentOrder.province = data['shippingAddress'].split(',')[1];
+        this.currentOrder.city = data['shippingAddress'].split(',')[0];
+        this.currentOrder.zipCode = parseInt(
+          data['shippingAddress'].split(',')[2]
+        );
+
+        // this.currentOrder.province,
+        //   this.currentOrder.city,
+        //   (this.currentOrder.zipCode = data['shippingAddress'].split(','));
+        // console.log('currentOrder: ', this.currentOrder);
+      })
+      .catch((error) => {
+        console.log('error: ', error.message);
+      });
   }
 
   submitForm(): void {

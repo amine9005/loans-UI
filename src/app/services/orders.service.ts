@@ -66,7 +66,7 @@ export class OrdersService {
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
     };
-    return httpCommon.get('/orders/orders/' + id, config);
+    return httpCommon.get('/orders/' + id, config);
   }
 
   getOrderByTotalPriceEqual(totalPrice: string) {

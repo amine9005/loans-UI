@@ -37,6 +37,7 @@
           min="0"
           formControlName="totalPrice"
           placeholder="Total Price"
+          [value]="this.currentOrder.totalPrice"
           required
         />
       </nz-input-group>
@@ -53,6 +54,7 @@
             formControlName="province"
             placeholder="Province"
             required
+            [value]="this.currentOrder.province"
           />
         </nz-input-group>
       </nz-form-control>
@@ -69,6 +71,7 @@
             formControlName="city"
             placeholder="City"
             required
+            [value]="this.currentOrder.city"
           />
         </nz-input-group>
       </nz-form-control>
@@ -85,6 +88,7 @@
             formControlName="zipCode"
             placeholder="Zip Code"
             required
+            [value]="this.currentOrder.zipCode"
           />
         </nz-input-group>
       </nz-form-control>
@@ -119,6 +123,7 @@
             formControlName="shippingPrice"
             placeholder="Shipping Price"
             required
+            [value]="this.currentOrder.shippingPrice"
           />
         </nz-input-group>
       </nz-form-control>
