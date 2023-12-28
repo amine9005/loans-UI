@@ -83,11 +83,21 @@ export class EditComponent implements OnInit {
         this.currentOrder.zipCode = parseInt(
           data['shippingAddress'].split(',')[2]
         );
+        this.currentOrder.paymentMethod = data['paymentMethod'];
+        this.currentOrder.orderItems = data['orderItems'];
 
-        // this.currentOrder.province,
-        //   this.currentOrder.city,
-        //   (this.currentOrder.zipCode = data['shippingAddress'].split(','));
-        // console.log('currentOrder: ', this.currentOrder);
+        this.validateForm = this.fb.group({
+          orderItems: [null, [Validators.required]],
+          zipCode: [null, [Validators.required]],
+          province: [null, [Validators.required]],
+          city: [null, [Validators.required]],
+          paymentMethod: [
+            this.currentOrder.paymentMethod,
+            [Validators.required],
+          ],
+          shippingPrice: [null, [Validators.required]],
+          totalPrice: [null, [Validators.required]],
+        });
       })
       .catch((error) => {
         console.log('error: ', error.message);
