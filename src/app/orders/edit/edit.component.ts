@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 interface OrderList {
   id: string;
@@ -48,7 +49,8 @@ export class EditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private productsService: ProductsService
   ) {}
 
   async ngOnInit(): Promise<any> {
@@ -85,23 +87,36 @@ export class EditComponent implements OnInit {
         );
         this.currentOrder.paymentMethod = data['paymentMethod'];
         this.currentOrder.orderItems = data['orderItems'];
-
-        this.validateForm = this.fb.group({
-          orderItems: [null, [Validators.required]],
-          zipCode: [null, [Validators.required]],
-          province: [null, [Validators.required]],
-          city: [null, [Validators.required]],
-          paymentMethod: [
-            this.currentOrder.paymentMethod,
-            [Validators.required],
-          ],
-          shippingPrice: [null, [Validators.required]],
-          totalPrice: [null, [Validators.required]],
-        });
       })
       .catch((error) => {
         console.log('error: ', error.message);
       });
+
+    this.productsService
+      .getProducts()
+      .then((products) => {
+        for (const prod of products.data['products']) {
+          // console.log('prod', JSON.stringify(prod));
+          this.Products.push({
+            id: prod._id,
+            name: prod.name,
+            price: prod.price,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('error: ' + error.message);
+      });
+
+    this.validateForm = this.fb.group({
+      orderItems: [this.Products, [Validators.required]],
+      zipCode: [this.currentOrder.zipCode, [Validators.required]],
+      province: [this.currentOrder.province, [Validators.required]],
+      city: [this.currentOrder.city, [Validators.required]],
+      paymentMethod: [this.currentOrder.paymentMethod, [Validators.required]],
+      shippingPrice: [this.currentOrder.shippingPrice, [Validators.required]],
+      totalPrice: [this.currentOrder.totalPrice, [Validators.required]],
+    });
   }
 
   submitForm(): void {
