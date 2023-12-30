@@ -133,24 +133,6 @@ export class EditComponent implements OnInit {
     this.validateForm.value.pictures = this.pictures;
     this.validateForm.controls['pictures'].setErrors(null);
 
-    // this.validateForm.controls['slag'].setValue(this.slagValue);
-    // console.log('pictures next: ', this.validateForm.value.thumbnail);
-
-    // console.log('product to be added: ', this.validateForm.value);
-    // console.log('valid: ', this.validateForm.valid);
-    // console.log('name: ', this.validateForm.controls['name']);
-    // console.log('quantity: ', this.validateForm.controls['quantity']);
-    // console.log('price: ', this.validateForm.controls['price']);
-    // console.log('featured: ', this.validateForm.controls['featured']);
-    // console.log('description: ', this.validateForm.controls['description']);
-    // console.log(
-    //   'short_description: ',
-    //   this.validateForm.controls['short_description']
-    // );
-    // console.log('slag: ', this.validateForm.controls['slag']);
-    // console.log('thumbnail: ', this.validateForm.controls['thumbnail']);
-    // console.log('pictures: ', this.validateForm.controls['pictures']);
-
     if (this.validateForm.valid) {
       this.invalid = false;
       this.productsService
