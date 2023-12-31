@@ -12,7 +12,7 @@ interface OrderList {
 
 interface Order {
   id: string;
-  orderItems: Array<string>;
+  orderItems: Array<string> | string | OrderList;
   paymentMethod: string;
   province: string;
   city: string;
@@ -70,6 +70,22 @@ export class EditComponent implements OnInit {
       totalPrice: [null, [Validators.required]],
     });
 
+    await this.productsService
+      .getProducts()
+      .then((products) => {
+        for (const prod of products.data['products']) {
+          // console.log('prod', JSON.stringify(prod));
+          this.Products.push({
+            id: prod._id,
+            name: prod.name,
+            price: prod.price,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('error: ' + error.message);
+      });
+
     await this.orderService
       .getOrderById(id)
       .then((resp) => {
@@ -86,30 +102,18 @@ export class EditComponent implements OnInit {
           data['shippingAddress'].split(',')[2]
         );
         this.currentOrder.paymentMethod = data['paymentMethod'];
-        this.currentOrder.orderItems = data['orderItems'];
+        this.currentOrder.orderItems =
+          this.Products[0].name + ' ' + '$' + this.Products[0].price;
       })
       .catch((error) => {
         console.log('error: ', error.message);
       });
 
-    this.productsService
-      .getProducts()
-      .then((products) => {
-        for (const prod of products.data['products']) {
-          // console.log('prod', JSON.stringify(prod));
-          this.Products.push({
-            id: prod._id,
-            name: prod.name,
-            price: prod.price,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('error: ' + error.message);
-      });
-
     this.validateForm = this.fb.group({
-      orderItems: [this.Products, [Validators.required]],
+      orderItems: [
+        this.Products[0].name + ' ' + '$' + this.Products[0].price,
+        [Validators.required],
+      ],
       zipCode: [this.currentOrder.zipCode, [Validators.required]],
       province: [this.currentOrder.province, [Validators.required]],
       city: [this.currentOrder.city, [Validators.required]],
