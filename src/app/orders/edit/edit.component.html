@@ -10,19 +10,13 @@
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter Order Items">
         <nz-input-group nzPrefixIcon="bars" class="field">
-          <nz-select
-            class="field"
-            nzPlaceHolder="Please select Products"
-            nzMode="multiple"
-            formControlName="orderItems"
-            (ngModelChange)="calculateTotalPrice()"
-          >
-            <nz-option
+          <select multiple class="multi-select" formControlName="orderItems">
+            <option
               *ngFor="let item of Products"
-              [nzLabel]="item.name + ' ' + '$' + item.price"
-              [nzValue]="item.id + '-' + item.price"
-            ></nz-option>
-          </nz-select>
+              [value]="item.id + '-' + item.price"
+              [label]="item.name + ' ' + '$' + item.price"
+            ></option>
+          </select>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>

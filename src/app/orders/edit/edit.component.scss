@@ -108,3 +108,9 @@ input{
   color: #ff4646;
   // background-color: #ff4646;
 }
+
+.multi-select{
+  width:100%;
+  overflow: scroll;
+  max-height: 200px;
+}
