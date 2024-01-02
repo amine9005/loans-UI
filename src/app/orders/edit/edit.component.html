@@ -7,19 +7,34 @@
   >
     <h2 class="title" nz-typography>Edit Order</h2>
 
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please enter Order Items">
-        <nz-input-group nzPrefixIcon="bars" class="field">
-          <select multiple class="multi-select" formControlName="orderItems">
-            <option
-              *ngFor="let item of Products"
-              [value]="item.id + '-' + item.price"
-              [label]="item.name + ' ' + '$' + item.price"
-            ></option>
-          </select>
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
+    <div *ngFor="let item of this.Products">
+      <nz-form-item class="img-container">
+        <img [src]="item.image" [alt]="item.image" />
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please select an Image">
+          <nz-input-group
+            class="file-field"
+            [nzSuffix]="suffixTemplateInfo"
+            [nzPrefix]="prefixTemplateUser"
+          >
+            {{ item.name + " $" + item.price }}
+          </nz-input-group>
+        </nz-form-control>
+
+        <ng-template #prefixTemplateUser
+          ><span nz-icon nzType="file-image"></span
+        ></ng-template>
+        <ng-template #suffixTemplateInfo>
+          <span
+            nz-icon
+            nz-button
+            nzType="minus-circle"
+            class="remove-img-btn"
+          ></span>
+        </ng-template>
+      </nz-form-item>
+    </div>
 
     <nz-form-item>
       <nz-input-group nzPrefixIcon="dollar" class="field">

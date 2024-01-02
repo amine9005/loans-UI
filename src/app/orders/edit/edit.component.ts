@@ -8,11 +8,12 @@ interface OrderList {
   id: string;
   name: string;
   price: number;
+  image: string;
 }
 
 interface Order {
   id: string;
-  orderItems: Array<string> | string | OrderList;
+  orderItems: OrderList | string;
   paymentMethod: string;
   province: string;
   city: string;
@@ -35,7 +36,7 @@ export class EditComponent implements OnInit {
   invalid = false;
   currentOrder: Order = {
     id: '',
-    orderItems: [],
+    orderItems: '',
     paymentMethod: '',
     province: '',
     city: '',
@@ -79,6 +80,7 @@ export class EditComponent implements OnInit {
             id: prod._id,
             name: prod.name,
             price: prod.price,
+            image: prod.thumbnail,
           });
         }
       })
