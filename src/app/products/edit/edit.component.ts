@@ -225,6 +225,7 @@ export class EditComponent implements OnInit {
         this.product = resp.data['product'];
         this.slagValue = this.product['slag'];
         console.log('slag: ', this.slagValue);
+        console.log('image: ', this.product.thumbnail.split('\\')[2]);
         this.productsService
           .getImage(this.product.thumbnail.split('\\')[2])
           .then((resp) => {

@@ -70,17 +70,29 @@ export class EditComponent implements OnInit {
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
     });
-
+    let image = '';
     await this.productsService
       .getProducts()
-      .then((products) => {
+      .then(async (products) => {
         for (const prod of products.data['products']) {
           // console.log('prod', JSON.stringify(prod));
+
+          // console.log('image: ', prod.thumbnail.split('\\')[2]);
+
+          await this.productsService
+            .getImage(prod.thumbnail.split('\\')[2])
+            .then((resp) => {
+              image = 'data:image/jpeg;base64,' + resp.data;
+            })
+            .catch((err) => {
+              console.log('error: ', err.message);
+            });
+          // console.log('image now: ', image);
           this.Products.push({
             id: prod._id,
             name: prod.name,
             price: prod.price,
-            image: prod.thumbnail,
+            image: image,
           });
         }
       })

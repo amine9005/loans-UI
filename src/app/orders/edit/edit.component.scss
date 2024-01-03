@@ -114,3 +114,10 @@ input{
   overflow: scroll;
   max-height: 200px;
 }
+
+.items-grid{
+  display: grid;
+  grid-column: 1fr 1fr;
+  width: 100%;
+  background-color: #ff4646;
+}

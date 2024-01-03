@@ -12,27 +12,30 @@
         <img [src]="item.image" [alt]="item.image" />
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please select an Image">
-          <nz-input-group
-            class="file-field"
-            [nzSuffix]="suffixTemplateInfo"
-            [nzPrefix]="prefixTemplateUser"
-          >
-            {{ item.name + " $" + item.price }}
-          </nz-input-group>
-        </nz-form-control>
-
-        <ng-template #prefixTemplateUser
-          ><span nz-icon nzType="file-image"></span
-        ></ng-template>
-        <ng-template #suffixTemplateInfo>
-          <span
-            nz-icon
-            nz-button
-            nzType="minus-circle"
-            class="remove-img-btn"
-          ></span>
-        </ng-template>
+        <div class="items-grid">
+          <nz-form-control nzErrorTip="Please select an Image">
+            <nz-input-group
+              class="file-field"
+              [nzSuffix]="suffixTemplateInfo"
+              [nzPrefix]="prefixTemplateUser"
+            >
+              {{ item.name + " $" + item.price }}
+            </nz-input-group>
+          </nz-form-control>
+          <div>
+            <ng-template #prefixTemplateUser
+              ><span nz-icon nzType="file-image"></span
+            ></ng-template>
+            <ng-template #suffixTemplateInfo>
+              <span
+                nz-icon
+                nz-button
+                nzType="minus-circle"
+                class="remove-img-btn"
+              ></span>
+            </ng-template>
+          </div>
+        </div>
       </nz-form-item>
     </div>
 
