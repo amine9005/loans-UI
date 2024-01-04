@@ -7,7 +7,7 @@
   >
     <h2 class="title" nz-typography>Edit Order</h2>
 
-    <div *ngFor="let item of this.Products">
+    <div *ngFor="let item of this.selectedItems">
       <nz-form-item class="img-container">
         <img [src]="item.image" [alt]="item.image" />
       </nz-form-item>
@@ -19,7 +19,9 @@
               [nzSuffix]="suffixTemplateInfo"
               [nzPrefix]="prefixTemplateUser"
             >
-              {{ item.name + " $" + item.price }}
+              <div class="data-div">
+                {{ item.name + " $" + item.price }}
+              </div>
             </nz-input-group>
           </nz-form-control>
           <div>
@@ -38,6 +40,26 @@
         </div>
       </nz-form-item>
     </div>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter Order Items">
+        <nz-input-group nzPrefixIcon="bars" class="field">
+          <nz-select
+            class="field"
+            nzMode="multiple"
+            nzPlaceHolder="Please select Products to Be Added"
+            formControlName="orderItems"
+            (ngModelChange)="calculateTotalPrice()"
+          >
+            <nz-option
+              *ngFor="let item of Products"
+              [nzLabel]="item.name + ' ' + '$' + item.price"
+              [nzValue]="item.id + '-' + item.price"
+            ></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
     <nz-form-item>
       <nz-input-group nzPrefixIcon="dollar" class="field">

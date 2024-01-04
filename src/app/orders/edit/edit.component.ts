@@ -31,7 +31,7 @@ export class EditComponent implements OnInit {
   validateForm!: FormGroup;
   Products: Array<OrderList> = [];
   totalPrice = 0;
-  selectedItems = ['here'];
+  selectedItems: Array<OrderList> = [];
   paymentMethods = ['PayPal', 'Visa', 'MasterCard', 'American Express'];
   invalid = false;
   currentOrder: Order = {
@@ -71,6 +71,7 @@ export class EditComponent implements OnInit {
       totalPrice: [null, [Validators.required]],
     });
     let image = '';
+
     await this.productsService
       .getProducts()
       .then(async (products) => {
@@ -116,8 +117,28 @@ export class EditComponent implements OnInit {
           data['shippingAddress'].split(',')[2]
         );
         this.currentOrder.paymentMethod = data['paymentMethod'];
-        this.currentOrder.orderItems =
-          this.Products[0].name + ' ' + '$' + this.Products[0].price;
+
+        for (const item of data['orderItems']) {
+          this.productsService
+            .getProductById(item)
+            .then(async (resp) => {
+              console.log('resp order: ', resp.data['product']);
+              const prod = resp.data['product'];
+              this.selectedItems.push({
+                id: prod._id,
+                name: prod.name,
+                price: prod.price,
+                image: image,
+              });
+            })
+            .catch((err) => {
+              console.log('unable to get product in order: ', err.message);
+            });
+        }
+
+        this.currentOrder.orderItems = data['orderItems'];
+
+        console.log('orderItems: ', this.currentOrder.orderItems);
       })
       .catch((error) => {
         console.log('error: ', error.message);
