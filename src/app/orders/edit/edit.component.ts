@@ -57,7 +57,7 @@ export class EditComponent implements OnInit {
   async ngOnInit(): Promise<any> {
     let id = '';
     this.route.params.subscribe((params) => {
-      console.log('params: ', JSON.stringify(params['id']));
+      // console.log('params: ', JSON.stringify(params['id']));
       id = params['id'];
     });
 
@@ -122,7 +122,7 @@ export class EditComponent implements OnInit {
           this.productsService
             .getProductById(item)
             .then(async (resp) => {
-              console.log('resp order: ', resp.data['product']);
+              // console.log('resp order: ', resp.data['product']);
               const prod = resp.data['product'];
               this.selectedItems.push({
                 id: prod._id,
@@ -138,7 +138,7 @@ export class EditComponent implements OnInit {
 
         this.currentOrder.orderItems = data['orderItems'];
 
-        console.log('orderItems: ', this.currentOrder.orderItems);
+        // console.log('orderItems: ', this.currentOrder.orderItems);
       })
       .catch((error) => {
         console.log('error: ', error.message);
