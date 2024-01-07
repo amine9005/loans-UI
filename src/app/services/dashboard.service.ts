@@ -43,4 +43,16 @@ export class DashboardService {
     };
     return httpCommon.get('/dashboard/inventorySize', config);
   }
+
+  getInventoryData(filter: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/dashboard/inventoryData' + filter, config);
+  }
 }
