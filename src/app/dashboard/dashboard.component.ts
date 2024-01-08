@@ -38,5 +38,15 @@ export class DashboardComponent implements OnInit {
         this.totalOrders = -1;
         console.log('error: ', err.message);
       });
+
+    this.dashboardService
+      .getInventoryData('sales')
+      .then((resp) => {
+        this.lineChartData.labels = resp.data['labels'];
+        this.lineChartData.datasets = resp.data['datasets'];
+      })
+      .catch((err) => {
+        console.log('Unable to get Inventory Data err: ', err.message);
+      });
   }
 }
