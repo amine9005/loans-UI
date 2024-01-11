@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { setOrders } from 'src/app/redux/orders/orders.actions';
 import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 interface Order {
   _id: string;
@@ -25,7 +26,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private store: Store<{ orders: response }>,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,22 @@ export class ListComponent implements OnInit {
         this.listOfData = data.data['order'] as Order[];
       }
     });
+  }
+
+  updateStatus(_id: string, event: any) {
+    console.log('updating status: ', _id, event);
+    this.productsService
+      .getProductById(_id)
+      .then((resp) => {
+        console.log('resp: ', resp.data['product']);
+      })
+      .catch((err) => {
+        console.log('Unable to find and update product: ', err.message);
+      });
+  }
+
+  update() {
+    console.log('Here here');
   }
 
   deleteOrder(id: string) {

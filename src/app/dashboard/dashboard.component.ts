@@ -39,11 +39,22 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', err.message);
       });
 
+    // this.dashboardService
+    //   .getInventoryData('sales')
+    //   .then((resp) => {
+    //     this.lineChartData.labels = resp.data['labels'];
+    //     this.lineChartData.datasets = resp.data['datasets'];
+    //   })
+    //   .catch((err) => {
+    //     console.log('Unable to get Inventory Data err: ', err.message);
+    //   });
+
     this.dashboardService
-      .getInventoryData('sales')
+      .getSalesData('Today')
       .then((resp) => {
-        this.lineChartData.labels = resp.data['labels'];
-        this.lineChartData.datasets = resp.data['datasets'];
+        console.log('sales Data: ', resp);
+        // this.lineChartData.labels = resp.data['labels'];
+        // this.lineChartData.datasets = resp.data['datasets'];
       })
       .catch((err) => {
         console.log('Unable to get Inventory Data err: ', err.message);

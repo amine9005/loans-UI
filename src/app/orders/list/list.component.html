@@ -23,7 +23,7 @@
           <th>Payment Method</th>
           <th>Shipping Price</th>
           <th>Total Price</th>
-          <th>Edit</th>
+          <th>Status</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -37,10 +37,12 @@
           <td>{{ data.shippingPrice }}</td>
           <td>{{ data.totalPrice }}</td>
           <td>
-            <a href="orders/edit/{{ data._id }}">
-              <span nz-icon nzType="edit"></span>
-              Edit
-            </a>
+            <select onchange="update()">
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Canceled">Canceled</option>
+            </select>
           </td>
 
           <td>
