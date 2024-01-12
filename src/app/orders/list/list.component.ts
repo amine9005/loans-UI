@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { setOrders } from 'src/app/redux/orders/orders.actions';
 import { response } from 'src/app/redux/orders/orders.types';
 import { OrdersService } from 'src/app/services/orders.service';
-import { ProductsService } from 'src/app/services/products.service';
 
 interface Order {
   _id: string;
@@ -26,8 +25,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private store: Store<{ orders: response }>,
-    private orderService: OrdersService,
-    private productsService: ProductsService
+    private orderService: OrdersService
   ) {}
 
   ngOnInit(): void {
@@ -60,11 +58,22 @@ export class ListComponent implements OnInit {
   }
 
   updateStatus(_id: string, event: any) {
-    console.log('updating status: ', _id, event);
-    this.productsService
-      .getProductById(_id)
+    console.log('updating status: ', _id, event.target.value);
+    this.orderService
+      .getOrderById(_id)
       .then((resp) => {
-        console.log('resp: ', resp.data['product']);
+        console.log('resp: ', resp.data['order'][0]);
+        const order = resp.data['order'][0];
+        order['status'] = event.target.value;
+        console.log('order: ', order);
+        this.orderService
+          .updateOrder(_id, order)
+          .then((resp) => {
+            console.log('order updated successfully');
+          })
+          .catch((err) => {
+            console.log('Unable to find and update product: ', err.message);
+          });
       })
       .catch((err) => {
         console.log('Unable to find and update product: ', err.message);

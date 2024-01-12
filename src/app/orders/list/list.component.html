@@ -37,7 +37,7 @@
           <td>{{ data.shippingPrice }}</td>
           <td>{{ data.totalPrice }}</td>
           <td>
-            <select onchange="update()">
+            <select (change)="updateStatus(data._id, $event)">
               <option value="Pending">Pending</option>
               <option value="Shipped">Shipped</option>
               <option value="Delivered">Delivered</option>

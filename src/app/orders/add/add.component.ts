@@ -23,6 +23,7 @@ export class AddComponent implements OnInit {
   selectedItems = ['here'];
   paymentMethods = ['PayPal', 'Visa', 'MasterCard', 'American Express'];
   invalid = false;
+  orderStatus = ['Pending', 'Shipped', 'Delivered', 'Canceled'];
 
   constructor(
     private router: Router,
@@ -50,6 +51,8 @@ export class AddComponent implements OnInit {
         ', ' +
         this.validateForm.value.zipCode),
         (this.invalid = false);
+
+      this.validateForm.value.dateCreated = new Date();
 
       this.ordersService
         .addOrder(this.validateForm.value)
@@ -93,6 +96,8 @@ export class AddComponent implements OnInit {
       paymentMethod: [null, [Validators.required]],
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
+      status: ['Pending', [Validators.required]],
+      dateCreated: [null, [Validators.required]],
     });
 
     this.productsService

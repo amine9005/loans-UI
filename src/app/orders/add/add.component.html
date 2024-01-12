@@ -109,6 +109,24 @@
     </nz-form-item>
 
     <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter order status">
+        <nz-input-group nzPrefixIcon="credit-card" class="field">
+          <nz-select
+            class="field"
+            nzPlaceHolder="Order Status"
+            formControlName="status"
+          >
+            <nz-option
+              *ngFor="let item of orderStatus"
+              [nzLabel]="item"
+              [nzValue]="item"
+            ></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
       <nz-form-control nzErrorTip="Please enter the Shipping Price">
         <nz-input-group nzPrefixIcon="shopping-cart" class="field">
           <input
