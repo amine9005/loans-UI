@@ -58,11 +58,11 @@ export class ListComponent implements OnInit {
   }
 
   updateStatus(_id: string, event: any) {
-    console.log('updating status: ', _id, event.target.value);
+    // console.log('updating status: ', _id, event.target.value);
     this.orderService
       .getOrderById(_id)
       .then((resp) => {
-        console.log('resp: ', resp.data['order'][0]);
+        // console.log('resp: ', resp.data['order'][0]);
         const order = resp.data['order'][0];
         order['status'] = event.target.value;
         console.log('order: ', order);
@@ -78,10 +78,6 @@ export class ListComponent implements OnInit {
       .catch((err) => {
         console.log('Unable to find and update product: ', err.message);
       });
-  }
-
-  update() {
-    console.log('Here here');
   }
 
   deleteOrder(id: string) {

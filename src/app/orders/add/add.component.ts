@@ -54,6 +54,8 @@ export class AddComponent implements OnInit {
 
       this.validateForm.value.dateCreated = new Date();
 
+      // console.log('order values: ', this.validateForm.value);
+
       this.ordersService
         .addOrder(this.validateForm.value)
         .then((resp) => {
@@ -97,7 +99,7 @@ export class AddComponent implements OnInit {
       shippingPrice: [null, [Validators.required]],
       totalPrice: [null, [Validators.required]],
       status: ['Pending', [Validators.required]],
-      dateCreated: [null, [Validators.required]],
+      dateCreated: [null],
     });
 
     this.productsService
