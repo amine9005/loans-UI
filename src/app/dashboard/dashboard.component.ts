@@ -18,6 +18,19 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService) {}
 
+  dataByDate(filter: string): void {
+    this.dashboardService
+      .getSalesData(filter)
+      .then((resp) => {
+        console.log('sales Data: ', resp);
+        // this.lineChartData.labels = resp.data['labels'];
+        // this.lineChartData.datasets = resp.data['datasets'];
+      })
+      .catch((err) => {
+        console.log('Unable to get Inventory Data err: ', err.message);
+      });
+  }
+
   ngOnInit(): void {
     this.dashboardService
       .getInventory()
