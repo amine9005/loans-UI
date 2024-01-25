@@ -25,12 +25,42 @@ export class DashboardComponent implements OnInit {
       .getSalesData(filter)
       .then((resp) => {
         console.log('sales Data: ', resp);
+        this.getDays(filter);
         // this.lineChartData.labels = resp.data['labels'];
         // this.lineChartData.datasets = resp.data['datasets'];
       })
       .catch((err) => {
         console.log('Unable to get Inventory Data err: ', err.message);
       });
+  }
+
+  getDays(filter: string): Array<Date> {
+    const currentDate = new Date();
+    const res: Array<Date> = [];
+    if (filter == '1W') {
+      for (let i = 6; i > -1; i--) {
+        res.push(
+          new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate() - i
+          )
+        );
+      }
+    } else if (filter == '1M') {
+      for (let i = 30; i > -1; i--) {
+        res.push(
+          new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate() - i
+          )
+        );
+      }
+    }
+
+    // console.log('Dates array: ', res);
+    return res;
   }
 
   ngOnInit(): void {

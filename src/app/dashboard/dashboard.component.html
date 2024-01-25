@@ -43,7 +43,7 @@
   <div class="setting-section">
     <div>
       <div *ngFor="let item of available_dates" class="dates">
-        <button nz-button onclick="dataByDate(item)" type="link">
+        <button nz-button (click)="dataByDate(item)" type="link">
           {{ item }}
         </button>
       </div>
