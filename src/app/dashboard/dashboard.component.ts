@@ -57,10 +57,41 @@ export class DashboardComponent implements OnInit {
           )
         );
       }
+    } else if (filter == '1Y') {
+      const numberOfDays = this.days_of_a_year(currentDate.getFullYear());
+      for (let i = numberOfDays; i > -1; i--) {
+        res.push(
+          new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate() - i
+          )
+        );
+      }
+    } else if (filter == '2Y') {
+      for (let j = 0; j < 2; j++) {
+        const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
+        for (let i = numberOfDays; i > -1; i--) {
+          res.push(
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              currentDate.getDate() - i
+            )
+          );
+        }
+      }
     }
-
     // console.log('Dates array: ', res);
     return res;
+  }
+
+  days_of_a_year(year: number): number {
+    return this.isLeapYear(year) ? 366 : 365;
+  }
+
+  isLeapYear(year: number): boolean {
+    return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
   }
 
   ngOnInit(): void {
