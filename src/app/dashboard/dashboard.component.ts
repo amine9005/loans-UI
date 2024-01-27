@@ -69,7 +69,33 @@ export class DashboardComponent implements OnInit {
         );
       }
     } else if (filter == '2Y') {
-      for (let j = 0; j < 2; j++) {
+      for (let j = 1; j > -1; j--) {
+        const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
+        for (let i = numberOfDays; i > -1; i--) {
+          res.push(
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              currentDate.getDate() - i
+            )
+          );
+        }
+      }
+    } else if (filter == '3Y') {
+      for (let j = 2; j > -1; j--) {
+        const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
+        for (let i = numberOfDays; i > -1; i--) {
+          res.push(
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              currentDate.getDate() - i
+            )
+          );
+        }
+      }
+    } else if (filter == '5Y') {
+      for (let j = 4; j > -1; j--) {
         const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
         for (let i = numberOfDays; i > -1; i--) {
           res.push(
