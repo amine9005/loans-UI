@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 
+interface dict {
+  key: string;
+  value: number;
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -25,8 +29,17 @@ export class DashboardComponent implements OnInit {
       .getSalesData(filter)
       .then((resp) => {
         console.log('sales Data: ', resp);
-        this.getDays(filter);
-        // this.lineChartData.labels = resp.data['labels'];
+        const data = this.getDays(filter);
+        console.log('data: ', data);
+        console.log('dates: ', this.lineChartData.labels);
+        resp.data['orders'].forEach((order: any) => {
+          const date = new Date(order.dateCreated).toDateString();
+          data.set(date, (data.get(date) as number) + 1);
+        });
+        console.log('keys: ', data.keys());
+        console.log('values: ', data.values());
+        console.log('data: ', data);
+
         // this.lineChartData.datasets = resp.data['datasets'];
       })
       .catch((err) => {
@@ -34,50 +47,54 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  getDays(filter: string): Array<Date> {
+  getDays(filter: string): Map<string, number> {
     const currentDate = new Date();
-    const res: Array<Date> = [];
+    const res = new Map();
     if (filter == '1W') {
       for (let i = 6; i > -1; i--) {
-        res.push(
+        res.set(
           new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             currentDate.getDate() - i
-          )
+          ).toDateString(),
+          0
         );
       }
     } else if (filter == '1M') {
       for (let i = 30; i > -1; i--) {
-        res.push(
+        res.set(
           new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             currentDate.getDate() - i
-          )
+          ).toDateString(),
+          0
         );
       }
     } else if (filter == '1Y') {
       const numberOfDays = this.days_of_a_year(currentDate.getFullYear());
       for (let i = numberOfDays; i > -1; i--) {
-        res.push(
+        res.set(
           new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             currentDate.getDate() - i
-          )
+          ).toDateString(),
+          0
         );
       }
     } else if (filter == '2Y') {
       for (let j = 1; j > -1; j--) {
         const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
         for (let i = numberOfDays; i > -1; i--) {
-          res.push(
+          res.set(
             new Date(
               currentDate.getFullYear(),
               currentDate.getMonth(),
               currentDate.getDate() - i
-            )
+            ).toDateString(),
+            0
           );
         }
       }
@@ -85,12 +102,13 @@ export class DashboardComponent implements OnInit {
       for (let j = 2; j > -1; j--) {
         const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
         for (let i = numberOfDays; i > -1; i--) {
-          res.push(
+          res.set(
             new Date(
               currentDate.getFullYear(),
               currentDate.getMonth(),
               currentDate.getDate() - i
-            )
+            ).toDateString(),
+            0
           );
         }
       }
@@ -98,12 +116,13 @@ export class DashboardComponent implements OnInit {
       for (let j = 4; j > -1; j--) {
         const numberOfDays = this.days_of_a_year(currentDate.getFullYear() - j);
         for (let i = numberOfDays; i > -1; i--) {
-          res.push(
+          res.set(
             new Date(
               currentDate.getFullYear(),
               currentDate.getMonth(),
               currentDate.getDate() - i
-            )
+            ).toDateString(),
+            0
           );
         }
       }
