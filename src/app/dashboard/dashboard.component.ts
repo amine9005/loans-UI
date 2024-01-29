@@ -36,8 +36,13 @@ export class DashboardComponent implements OnInit {
           const date = new Date(order.dateCreated).toDateString();
           data.set(date, (data.get(date) as number) + 1);
         });
-        console.log('keys: ', data.keys());
-        console.log('values: ', data.values());
+
+        this.lineChartData.labels = Array.from(data.keys());
+        this.lineChartData.datasets = [
+          { data: Array.from(data.values()), label: 'Sales' },
+        ];
+        console.log('keys: ', Array.from(data.keys()));
+        console.log('values: ', Array.from(data.values()));
         console.log('data: ', data);
 
         // this.lineChartData.datasets = resp.data['datasets'];
