@@ -57,10 +57,14 @@
   <div class="charts-container">
     <canvas
       baseChart
-      width="600"
-      height="400"
-      type="line"
+      width="720px"
+      height="480px"
+      [type]="'line'"
       [data]="lineChartData"
-    ></canvas>
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+      ></canvas
+    >
   </div>
 </div>
