@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 interface dict {
   key: string;
@@ -17,11 +17,6 @@ export class DashboardComponent implements OnInit {
   totalProducts = 69;
 
   available_dates = ['1W', '1M', 'YTD', '1Y', '2Y', '3Y', '5Y', 'ALL'];
-
-  // lineChartData = {
-  //   labels: ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'],
-  //   datasets: [{ data: [31, 65, 69, 71, 59, 66, 68], label: 'Sales' }],
-  // };
 
   title = 'Sales Data';
 
