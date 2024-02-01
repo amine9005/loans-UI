@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   available_dates = ['1W', '1M', 'YTD', '1Y', '2Y', '3Y', '5Y', 'ALL'];
 
   title = 'Sales Data';
+  fetchFor = 'Sales';
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'],
@@ -41,40 +42,69 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) {}
 
   dataByDate(filter: string): void {
-    this.dashboardService
-      .getSalesData(filter)
-      .then((resp) => {
-        console.log('sales Data: ', resp);
-        const data = this.getDays(filter);
-        // console.log('data: ', data);
-        // console.log('dates: ', this.lineChartData.labels);
-        resp.data['orders'].forEach((order: any) => {
-          const date = new Date(order.dateCreated).toDateString();
-          data.set(date, (data.get(date) as number) + 1);
+    if (this.fetchFor == 'Sales') {
+      this.dashboardService
+        .getSalesData(filter)
+        .then((resp) => {
+          console.log('sales Data: ', resp);
+          const data = this.getDays(filter);
+
+          resp.data['orders'].forEach((order: any) => {
+            const date = new Date(order.dateCreated).toDateString();
+            data.set(date, (data.get(date) as number) + 1);
+          });
+
+          this.lineChartData.labels = Array.from(data.keys());
+          this.lineChartData.datasets = [
+            {
+              data: Array.from(data.values()),
+              label: 'Sales',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(255,0,0,0.3)',
+            },
+          ];
+
+          console.log('line data: ', this.lineChartData.datasets);
+
+          // this.lineChartData.datasets = resp.data['datasets'];
+        })
+        .catch((err) => {
+          console.log('Unable to get Sales Data err: ', err.message);
         });
+    } else if (this.fetchFor == 'Inventory') {
+      this.dashboardService
+        .getInventoryData(filter)
+        .then((resp) => {
+          console.log('Inventory Data: ', resp);
+          const data = this.getDays(filter);
 
-        this.lineChartData.labels = Array.from(data.keys());
-        this.lineChartData.datasets = [
-          {
-            data: Array.from(data.values()),
-            label: 'Sales',
-            fill: true,
-            tension: 0.5,
-            borderColor: 'black',
-            backgroundColor: 'rgba(255,0,0,0.3)',
-          },
-        ];
-        // console.log('keys: ', Array.from(data.keys()));
-        // console.log('values: ', Array.from(data.values()));
-        // console.log('data: ', data);
+          resp.data['products'].forEach((order: any) => {
+            const date = new Date(order.dateCreated).toDateString();
+            data.set(date, (data.get(date) as number) + 1);
+          });
 
-        console.log('line data: ', this.lineChartData.datasets);
+          this.lineChartData.labels = Array.from(data.keys());
+          this.lineChartData.datasets = [
+            {
+              data: Array.from(data.values()),
+              label: 'Inventory',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(255,0,0,0.3)',
+            },
+          ];
 
-        // this.lineChartData.datasets = resp.data['datasets'];
-      })
-      .catch((err) => {
-        console.log('Unable to get Inventory Data err: ', err.message);
-      });
+          console.log('line data: ', this.lineChartData.datasets);
+
+          // this.lineChartData.datasets = resp.data['datasets'];
+        })
+        .catch((err) => {
+          console.log('Unable to get Inventory Data err: ', err.message);
+        });
+    }
   }
 
   getDays(filter: string): Map<string, number> {
@@ -157,7 +187,6 @@ export class DashboardComponent implements OnInit {
         }
       }
     }
-    // console.log('Dates array: ', res);
     return res;
   }
 
@@ -189,16 +218,6 @@ export class DashboardComponent implements OnInit {
         this.totalOrders = -1;
         console.log('error: ', err.message);
       });
-
-    // this.dashboardService
-    //   .getInventoryData('sales')
-    //   .then((resp) => {
-    //     this.lineChartData.labels = resp.data['labels'];
-    //     this.lineChartData.datasets = resp.data['datasets'];
-    //   })
-    //   .catch((err) => {
-    //     console.log('Unable to get Inventory Data err: ', err.message);
-    //   });
 
     this.dashboardService
       .getSalesData('Today')
