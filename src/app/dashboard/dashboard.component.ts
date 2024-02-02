@@ -104,6 +104,37 @@ export class DashboardComponent implements OnInit {
         .catch((err) => {
           console.log('Unable to get Inventory Data err: ', err.message);
         });
+    } else if (this.fetchFor == 'Orders') {
+      this.dashboardService
+        .getOrdersData(filter)
+        .then((resp) => {
+          console.log('Orders Data: ', resp);
+          const data = this.getDays(filter);
+
+          resp.data['orders'].forEach((order: any) => {
+            const date = new Date(order.dateCreated).toDateString();
+            data.set(date, (data.get(date) as number) + 1);
+          });
+
+          this.lineChartData.labels = Array.from(data.keys());
+          this.lineChartData.datasets = [
+            {
+              data: Array.from(data.values()),
+              label: 'Orders',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(255,0,0,0.3)',
+            },
+          ];
+
+          console.log('line data: ', this.lineChartData.datasets);
+
+          // this.lineChartData.datasets = resp.data['datasets'];
+        })
+        .catch((err) => {
+          console.log('Unable to get Orders Data err: ', err.message);
+        });
     }
   }
 

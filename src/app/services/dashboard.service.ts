@@ -56,6 +56,18 @@ export class DashboardService {
     return httpCommon.get('/dashboard/inventoryData' + filter, config);
   }
 
+  getOrdersData(filter: string) {
+    let token = '';
+    this.store.select('user').subscribe((data) => {
+      token = data.token;
+    });
+    const config = {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    return httpCommon.get('/dashboard/OrdersData' + filter, config);
+  }
+
   getSalesData(filter: string) {
     let token = '';
     this.store.select('user').subscribe((data) => {
