@@ -250,15 +250,6 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', err.message);
       });
 
-    this.dashboardService
-      .getSalesData('Today')
-      .then((resp) => {
-        console.log('sales Data: ', resp);
-        // this.lineChartData.labels = resp.data['labels'];
-        // this.lineChartData.datasets = resp.data['datasets'];
-      })
-      .catch((err) => {
-        console.log('Unable to get Inventory Data err: ', err.message);
-      });
+    this.dataByDate('1W');
   }
 }
