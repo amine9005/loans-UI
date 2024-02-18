@@ -2,7 +2,7 @@ import httpCommon from '../utils/http-common';
 
 class authServiceClass {
   login(email: string, password: string) {
-    console.log('email: ' + email, ' password: ' + password);
+    // console.log('email: ' + email, ' password: ' + password);
     return httpCommon.post(
       'auth/login',
       { email, password },
