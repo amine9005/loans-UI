@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   available_dates = ['1W', '1M', 'YTD', '1Y', '2Y', '3Y', '5Y', 'ALL'];
 
   title = 'Sales Data';
-  fetchFor = 'Sales';
+  selectBy = 'Sales';
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'],
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) {}
 
   dataByDate(filter: string): void {
-    if (this.fetchFor == 'Sales') {
+    if (this.selectBy == 'Sales') {
       this.dashboardService
         .getSalesData(filter)
         .then((resp) => {
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
         .catch((err) => {
           console.log('Unable to get Sales Data err: ', err.message);
         });
-    } else if (this.fetchFor == 'Inventory') {
+    } else if (this.selectBy == 'Inventory') {
       this.dashboardService
         .getInventoryData(filter)
         .then((resp) => {
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
         .catch((err) => {
           console.log('Unable to get Inventory Data err: ', err.message);
         });
-    } else if (this.fetchFor == 'Orders') {
+    } else if (this.selectBy == 'Orders') {
       this.dashboardService
         .getOrdersData(filter)
         .then((resp) => {
