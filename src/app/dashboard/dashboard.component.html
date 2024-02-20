@@ -48,7 +48,7 @@
         </button>
       </div>
     </div>
-    <select [(ngModel)]="selectBy">
+    <select [(ngModel)]="selectBy" (ngModelChange)="setSelection($event)">
       <option>Sales</option>
       <option>Inventory</option>
       <option>Orders</option>

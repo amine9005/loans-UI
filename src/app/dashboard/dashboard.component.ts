@@ -229,6 +229,10 @@ export class DashboardComponent implements OnInit {
     return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
   }
 
+  setSelection(event: any) {
+    this.selectBy = event.target.value;
+  }
+
   ngOnInit(): void {
     this.dashboardService
       .getInventory()
