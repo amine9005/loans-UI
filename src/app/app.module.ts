@@ -38,6 +38,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { productsReducer } from './redux/products/products.reducer';
 import { ordersReducer } from './redux/orders/orders.reducer';
 import { NgChartsModule } from 'ng2-charts';
+import { GraphComponent } from './dashboard/graph/graph.component';
 
 registerLocaleData(en);
 
@@ -50,6 +51,7 @@ registerLocaleData(en);
     FooterComponent,
     DashboardComponent,
     PageNotFoundComponent,
+    GraphComponent,
   ],
   imports: [
     BrowserModule,

@@ -54,15 +54,10 @@
       <option>Orders</option>
     </select>
   </div>
-  <div class="charts-container">
-    <canvas
-      baseChart
-      [type]="'line'"
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      [legend]="lineChartLegend"
-    >
-      ></canvas
-    >
-  </div>
+  <app-graph
+    [available_dates]="available_dates"
+    [lineChartData]="lineChartData"
+    [lineChartOptions]="lineChartOptions"
+    [lineChartLegend]="lineChartLegend"
+  ></app-graph>
 </div>
