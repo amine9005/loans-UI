@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { response } from 'src/app/redux/products/products.types';
 import { ProductsService } from 'src/app/services/products.service';
 import { setProducts } from 'src/app/redux/products/products.actions';
-
-
+import { DashboardService } from 'src/app/services/dashboard.service';
 interface Product {
   _id: string;
   name: string;
@@ -21,12 +20,14 @@ interface Product {
 })
 export class ListComponent implements OnInit {
   constructor(
-      private store: Store<{
+    private store: Store<{
       products: response;
     }>,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private dashboardService: DashboardService
   ) {}
   listOfData: Product[] = [];
+  totalProducts = 0;
   ngOnInit(): void {
     this.productService
       .getProducts()
@@ -45,6 +46,16 @@ export class ListComponent implements OnInit {
       if (data.data['products']) {
         this.listOfData = data.data['products'] as Product[];
       }
+
+      this.dashboardService
+        .getInventory()
+        .then((resp) => {
+          this.totalProducts = resp.data['products'];
+        })
+        .catch((err) => {
+          this.totalProducts = -1;
+          console.log('error: ', err.message);
+        });
     });
   }
 
