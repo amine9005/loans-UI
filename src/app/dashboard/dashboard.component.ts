@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartItem, ChartOptions } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 interface dict {
   key: string;
@@ -15,28 +16,13 @@ export class DashboardComponent implements OnInit {
   totalSales = 31700;
   totalOrders = 124;
   totalProducts = 69;
+  chart!: Chart;
 
   available_dates = ['1W', '1M', 'YTD', '1Y', '2Y', '3Y', '5Y', 'ALL'];
 
   title = 'Sales Data';
   selectBy = 'Sales';
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'],
-    datasets: [
-      {
-        data: [31, 65, 69, 71, 59, 66, 68],
-        label: 'Sales',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-      },
-    ],
-  };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: true,
-  };
   public lineChartLegend = true;
 
   constructor(private dashboardService: DashboardService) {}
@@ -54,19 +40,42 @@ export class DashboardComponent implements OnInit {
             data.set(date, (data.get(date) as number) + 1);
           });
 
-          this.lineChartData.labels = Array.from(data.keys());
-          this.lineChartData.datasets = [
-            {
-              data: Array.from(data.values()),
-              label: 'Sales',
-              fill: true,
-              tension: 0.5,
-              borderColor: 'black',
-              backgroundColor: 'rgba(255,0,0,0.3)',
-            },
-          ];
-
-          console.log('line data: ', this.lineChartData.datasets);
+          if (this.chart) {
+            this.chart.data = {
+              labels: Array.from(data.keys()),
+              datasets: [
+                {
+                  data: Array.from(data.values()),
+                  label: 'Sales',
+                  fill: true,
+                  tension: 0.5,
+                  borderColor: 'black',
+                  backgroundColor: 'rgba(255,0,0,0.3)',
+                },
+              ],
+            };
+            this.chart.update();
+          } else {
+            this.chart = new Chart(
+              document.getElementById('acquisitions') as ChartItem,
+              {
+                type: 'line',
+                data: {
+                  labels: Array.from(data.keys()),
+                  datasets: [
+                    {
+                      data: Array.from(data.values()),
+                      label: 'Sales',
+                      fill: true,
+                      tension: 0.5,
+                      borderColor: 'black',
+                      backgroundColor: 'rgba(255,0,0,0.3)',
+                    },
+                  ],
+                },
+              }
+            );
+          }
 
           // this.lineChartData.datasets = resp.data['datasets'];
         })
@@ -79,26 +88,49 @@ export class DashboardComponent implements OnInit {
         .then((resp) => {
           console.log('Inventory Data: ', resp);
           const data = this.getDays(filter);
+          this.title = 'Inventory';
 
           resp.data['products'].forEach((order: any) => {
             const date = new Date(order.dateCreated).toDateString();
             data.set(date, (data.get(date) as number) + 1);
           });
 
-          this.lineChartData.labels = Array.from(data.keys());
-          this.lineChartData.datasets = [
-            {
-              data: Array.from(data.values()),
-              label: 'Inventory',
-              fill: true,
-              tension: 0.5,
-              borderColor: 'black',
-              backgroundColor: 'rgba(255,0,0,0.3)',
-            },
-          ];
-
-          console.log('line data: ', this.lineChartData.datasets);
-
+          if (this.chart) {
+            this.chart.data = {
+              labels: Array.from(data.keys()),
+              datasets: [
+                {
+                  data: Array.from(data.values()),
+                  label: 'Inventory',
+                  fill: true,
+                  tension: 0.5,
+                  borderColor: 'black',
+                  backgroundColor: 'rgba(255,0,0,0.3)',
+                },
+              ],
+            };
+            this.chart.update();
+          } else {
+            this.chart = new Chart(
+              document.getElementById('acquisitions') as ChartItem,
+              {
+                type: 'line',
+                data: {
+                  labels: Array.from(data.keys()),
+                  datasets: [
+                    {
+                      data: Array.from(data.values()),
+                      label: 'Inventory',
+                      fill: true,
+                      tension: 0.5,
+                      borderColor: 'black',
+                      backgroundColor: 'rgba(255,0,0,0.3)',
+                    },
+                  ],
+                },
+              }
+            );
+          }
           // this.lineChartData.datasets = resp.data['datasets'];
         })
         .catch((err) => {
@@ -110,25 +142,48 @@ export class DashboardComponent implements OnInit {
         .then((resp) => {
           console.log('Orders Data: ', resp);
           const data = this.getDays(filter);
-
+          this.title = 'Orders';
           resp.data['orders'].forEach((order: any) => {
             const date = new Date(order.dateCreated).toDateString();
             data.set(date, (data.get(date) as number) + 1);
           });
 
-          this.lineChartData.labels = Array.from(data.keys());
-          this.lineChartData.datasets = [
-            {
-              data: Array.from(data.values()),
-              label: 'Orders',
-              fill: true,
-              tension: 0.5,
-              borderColor: 'black',
-              backgroundColor: 'rgba(255,0,0,0.3)',
-            },
-          ];
-
-          console.log('line data: ', this.lineChartData.datasets);
+          if (this.chart) {
+            this.chart.data = {
+              labels: Array.from(data.keys()),
+              datasets: [
+                {
+                  data: Array.from(data.values()),
+                  label: 'Orders',
+                  fill: true,
+                  tension: 0.5,
+                  borderColor: 'black',
+                  backgroundColor: 'rgba(255,0,0,0.3)',
+                },
+              ],
+            };
+            this.chart.update();
+          } else {
+            this.chart = new Chart(
+              document.getElementById('acquisitions') as ChartItem,
+              {
+                type: 'line',
+                data: {
+                  labels: Array.from(data.keys()),
+                  datasets: [
+                    {
+                      data: Array.from(data.values()),
+                      label: 'Orders',
+                      fill: true,
+                      tension: 0.5,
+                      borderColor: 'black',
+                      backgroundColor: 'rgba(255,0,0,0.3)',
+                    },
+                  ],
+                },
+              }
+            );
+          }
 
           // this.lineChartData.datasets = resp.data['datasets'];
         })
@@ -232,8 +287,7 @@ export class DashboardComponent implements OnInit {
   setSelection(event: any) {
     this.selectBy = event.target.value;
   }
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.dashboardService
       .getInventory()
       .then((resp) => {
@@ -254,6 +308,6 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', err.message);
       });
 
-    this.dataByDate('1W');
+    await this.dataByDate('1W');
   }
 }
